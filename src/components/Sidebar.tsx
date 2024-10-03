@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import homeLogo from "../assets/home.png";
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
