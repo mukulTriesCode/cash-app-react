@@ -1,12 +1,15 @@
 import "./App.css";
-import Sidebar from "./components/Sidebar";
-import Dashboard from "./components/Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+
 function App() {
   return (
-    <main>
-      <Sidebar />
-      <Dashboard />
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" index element={<Home />} />
+        <Route path="*" element={<h1>404</h1>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
