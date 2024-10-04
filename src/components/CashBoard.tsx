@@ -1,5 +1,5 @@
 import React from "react";
-import CashDash from "../assets/CashDash.png";
+import CashDash from "../assets/CashDash-min (1).webp";
 import Profile from "../assets/profile.png";
 
 const CashBoard: React.FC = () => {
@@ -14,7 +14,7 @@ const CashBoard: React.FC = () => {
       </div>
       <div className="w-full flex flex-col max-w-[450px]">
         <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold">Investments</h2>
+          <h2 className="text-3xl font-bold">Records</h2>
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,6 +36,8 @@ const CashBoard: React.FC = () => {
             className="w-14 h-14 rounded-full object-cover"
             src={Profile}
             alt="Profile Image"
+            fetchPriority="high"
+            rel="preload"
           />
           <span className="ml-4 text-lg font-medium">
             <div className="text-sm">Mukul Sharma</div>
@@ -44,12 +46,12 @@ const CashBoard: React.FC = () => {
         </div>
         <div className="flex justify-between mt-7">
           <div className="w-1/2">
-            <div className="text-xs font-light">Price per NFT</div>
-            <div className="text-xl font-bold">80 PLAYR</div>
+            <div className="text-xs font-light">Opening Balance</div>
+            <div className="text-xl font-bold">Rs. 8143</div>
           </div>
           <div className="w-1/2">
-            <div className="text-xs font-light">Starts in</div>
-            <div className="text-xl font-bold">02h 32m 44s</div>
+            <div className="text-xs font-light">Current Balance</div>
+            <div className="text-xl font-bold">Rs. 10000</div>
           </div>
         </div>
         <div className="flex mt-auto gap-4 font-semibold">

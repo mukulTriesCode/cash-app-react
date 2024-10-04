@@ -5,34 +5,93 @@ import {
   PointElement,
   Chart,
   BarElement,
+  LineElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
-Chart.register(CategoryScale, LinearScale, PointElement, BarElement);
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  LineElement
+);
 
-const BarChart: React.FC = () => {
+const BarChart: React.FC<{ chartType: "bar" | "line" }> = ({ chartType }) => {
   return (
-    <div className="border border-red-50">
-      <Bar
-        data={{
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-          datasets: [
-            {
-              label: "My First dataset",
-              backgroundColor: "rgb(255, 99, 132)",
-              borderColor: "rgb(255, 99, 132)",
-              data: [0, 10, 5, 2, 20, 30, 45],
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        }}
-      />
+    <div className="bg-gradient-to-bl from-gradient-red/40 to-gradient-blue/40 p-[2px] rounded-xl shadow-lg">
+      <div className="p-4 w-full h-full rounded-xl bg-black flex items-end">
+        {chartType === "bar" && (
+          <Bar
+            data={{
+              labels: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+              datasets: [
+                {
+                  label: "My First dataset",
+                  backgroundColor: "rgb(255, 99, 132)",
+                  borderColor: "rgb(255, 99, 132)",
+                  data: [0, 10, 5, 2, 20, 30, 45, 42, 48, 50, 60, 70],
+                },
+              ],
+            }}
+            options={{
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            }}
+          />
+        )}
+        {chartType === "line" && (
+          <Line
+            data={{
+              labels: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+              datasets: [
+                {
+                  label: "My First dataset",
+                  backgroundColor: "rgb(255, 99, 132)",
+                  borderColor: "rgb(255, 99, 132)",
+                  data: [0, 10, 5, 2, 20, 30, 45, 42, 48, 50, 60, 70],
+                },
+              ],
+            }}
+            options={{
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };
