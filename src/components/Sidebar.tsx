@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import homeLogo from "../assets/home.png";
+import { Link } from "react-router-dom";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,8 +51,8 @@ const Sidebar: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col flex-nowrap items-center px-3">
-          <a
-            href="#"
+          <Link
+            to="/"
             className={`${
               isOpen ? "justify-start gap-4" : ""
             } flex transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
@@ -66,7 +67,24 @@ const Sidebar: React.FC = () => {
             >
               Home
             </span>
-          </a>
+          </Link>
+          <Link
+            to="/path"
+            className={`${
+              isOpen ? "justify-start gap-4" : ""
+            } flex transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
+          >
+            <div className="h-[22px] w-[22px]">
+              <img className="w-full h-auto" src={homeLogo} alt="home" />
+            </div>
+            <span
+              className={`transition-all ${
+                isOpen ? "w-auto opacity-100" : "w-0 opacity-0"
+              }`}
+            >
+              Path
+            </span>
+          </Link>
         </div>
       </div>
     </div>
