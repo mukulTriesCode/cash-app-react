@@ -24,7 +24,7 @@ const LinePath: React.FC = () => {
           duration: "100%",
           triggerHook: 0.5,
         })
-          // @ts-ignore
+          // @ts-expect-error type not found
           .on("progress", (e: { progress: number }) => {
             const drawLength = lineLength * e.progress;
             activePath.style.strokeDashoffset = String(lineLength - drawLength);
@@ -32,7 +32,7 @@ const LinePath: React.FC = () => {
             progressLine.style.transform = `scaleY(${e.progress})`;
 
             // Update visible items based on scroll progress
-            const itemCount = 5;
+            const itemCount = 6;
             const visibleCount = Math.ceil(e.progress * itemCount);
             setVisibleItems(
               Array.from({ length: visibleCount }, (_, i) => i + 1)
@@ -84,7 +84,7 @@ const LinePath: React.FC = () => {
           </svg>
         </>
         {/* Mobile progress line */}
-        <div className="container flex gap-4">
+        <div className="container flex md:hidden gap-4">
           <div className="relative inset-0 w-0.5 md:hidden">
             <div className="absolute inset-0 bg-[#e5e6e8]"></div>
             <div
@@ -98,10 +98,10 @@ const LinePath: React.FC = () => {
             ></div>
           </div>
           <div className="">
-            {[1, 2, 3, 4, 5].map((item) => (
+            {[1, 2, 3, 4, 5, 6].map((item) => (
               <div
                 key={item}
-                className={`my-20 relative transition-opacity duration-700 ease-in-out ${
+                className={`my-20 relative transition-opacity duration-300 ease-in-out ${
                   visibleItems.includes(item) ? "opacity-100" : "opacity-0"
                 }`}
               >
