@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Category from "../assets/Category.png";
 
 const CategorySlider: React.FC = () => {
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperRef>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -38,7 +38,7 @@ const CategorySlider: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               className={`transition-all p-2 rounded-xl border border-white/15 ${
-                isBeginning ? "bg-transparent" : "bg-white/15"
+                isBeginning ? "bg-transparent" : "bg-white/15 hover:bg-white/20"
               }`}
               onClick={handlePrev}
               disabled={isBeginning}
@@ -60,7 +60,7 @@ const CategorySlider: React.FC = () => {
             </button>
             <button
               className={`transition-all p-2 rounded-xl border border-white/15 ${
-                isEnd ? "bg-transparent" : "bg-white/15"
+                isEnd ? "bg-transparent" : "bg-white/15 hover:bg-white/20"
               }`}
               onClick={handleNext}
               disabled={isEnd}
@@ -89,7 +89,7 @@ const CategorySlider: React.FC = () => {
         spaceBetween={26}
         slidesPerView={"auto"}
       >
-        {[...Array(5)].map((_, index) => (
+        {[...Array(8)].map((_, index) => (
           <SwiperSlide className="max-w-[242px]" key={index}>
             <CategoryCard />
           </SwiperSlide>

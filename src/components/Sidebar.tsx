@@ -8,14 +8,14 @@ const Sidebar: React.FC = () => {
   return (
     <div className="flex">
       <div
-        className={`bg-background fixed border-r-[0.5px] border-white/10 h-screen transition-all duration-300 z-10 ${
+        className={`bg-[#131313] fixed z-[1000] border-r-[0.5px] border-white/10 h-screen transition-all duration-300 ${
           isOpen ? "w-72" : "w-[88px] overflow-hidden"
         }`}
       >
-        <div className={`flex-1 p-4 ml-0 z-10`}>
+        <div className={`flex-1 p-4 py-6 ml-0 z-10`}>
           <div className="ml-auto">
             <button
-              className="transition-all bg-purple-shade hover:bg-purple-shade/90 font-bold py-2 px-4 rounded"
+              className="transition-all bg-purple-shade hover:bg-purple-shade/90 font-bold py-3 px-4 rounded-lg"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? (
