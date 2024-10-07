@@ -38,7 +38,7 @@ const CategorySlider: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               className={`transition-all p-2 rounded-xl border border-white/15 ${
-                isBeginning ? "bg-transparent" : "bg-white/15"
+                isBeginning ? "bg-transparent" : "bg-white/15 hover:bg-white/20"
               }`}
               onClick={handlePrev}
               disabled={isBeginning}
@@ -60,7 +60,7 @@ const CategorySlider: React.FC = () => {
             </button>
             <button
               className={`transition-all p-2 rounded-xl border border-white/15 ${
-                isEnd ? "bg-transparent" : "bg-white/15"
+                isEnd ? "bg-transparent" : "bg-white/15 hover:bg-white/20"
               }`}
               onClick={handleNext}
               disabled={isEnd}
