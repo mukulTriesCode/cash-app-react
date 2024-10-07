@@ -27,7 +27,7 @@ const Home = () => {
   };
   return (
     <div>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<></>}>
         <ChatBot flow={flow} />
       </React.Suspense>
       <main className="relative">
