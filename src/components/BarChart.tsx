@@ -41,8 +41,8 @@ const BarChart: React.FC<{ chartType: "bar" | "line" }> = ({ chartType }) => {
               datasets: [
                 {
                   label: "My First dataset",
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(255, 99, 132)",
+                  backgroundColor: "#34D178",
+                  borderColor: "#34D178",
                   data: [0, 10, 5, 2, 20, 30, 45, 42, 48, 50, 60, 70],
                 },
               ],
@@ -76,8 +76,8 @@ const BarChart: React.FC<{ chartType: "bar" | "line" }> = ({ chartType }) => {
               datasets: [
                 {
                   label: "My First dataset",
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(255, 99, 132)",
+                  backgroundColor: "#34D178",
+                  borderColor: "#34D178",
                   data: [0, 10, 5, 2, 20, 30, 45, 42, 48, 50, 60, 70],
                 },
               ],

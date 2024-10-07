@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Category from "../assets/Category.png";
 
 const CategorySlider: React.FC = () => {
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperRef>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -89,7 +89,7 @@ const CategorySlider: React.FC = () => {
         spaceBetween={26}
         slidesPerView={"auto"}
       >
-        {[...Array(5)].map((_, index) => (
+        {[...Array(8)].map((_, index) => (
           <SwiperSlide className="max-w-[242px]" key={index}>
             <CategoryCard />
           </SwiperSlide>

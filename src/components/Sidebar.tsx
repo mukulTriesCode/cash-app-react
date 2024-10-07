@@ -12,10 +12,10 @@ const Sidebar: React.FC = () => {
           isOpen ? "w-72" : "w-[88px] overflow-hidden"
         }`}
       >
-        <div className={`flex-1 p-4 ml-0 z-10`}>
+        <div className={`flex-1 p-4 py-6 ml-0 z-10`}>
           <div className="ml-auto">
             <button
-              className="transition-all bg-purple-shade hover:bg-purple-shade/90 font-bold py-2 px-4 rounded"
+              className="transition-all bg-purple-shade hover:bg-purple-shade/90 font-bold py-3 px-4 rounded-lg"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? (
