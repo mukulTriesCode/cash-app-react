@@ -6,7 +6,7 @@ import TransactionHistory from "./TransactionHistory";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="ms-[88px] grid grid-cols-3 gap-8 p-7">
+    <div className="grid grid-cols-3 gap-8 p-7">
       <CashBoard />
       <BarChart chartType="bar" />
       <CategorySlider />

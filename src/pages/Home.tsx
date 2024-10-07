@@ -1,6 +1,7 @@
 import Sidebar from "../components/Sidebar";
 import Dashboard from "../components/Dashboard";
 import background from "../assets/Dashboard-min (1).webp";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (
@@ -14,7 +15,12 @@ const Home = () => {
           />
         </div>
         <Sidebar />
-        <Dashboard />
+        <div className="ms-[88px]">
+          <Navbar />
+          <div className="pt-[95px]">
+            <Dashboard />
+          </div>
+        </div>
       </main>
     </div>
   );
