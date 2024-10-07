@@ -5,7 +5,7 @@ import "swiper/css";
 
 const TransactionHistory: React.FC = () => {
   return (
-    <div className="flex flex-col gap-6">
+    <div data-lenis-prevent className="flex flex-col gap-6">
       <h2 className="text-2xl font-bold leading-[2.375rem]">
         Transaction History
       </h2>
@@ -13,7 +13,7 @@ const TransactionHistory: React.FC = () => {
         <Swiper
           modules={[Mousewheel]}
           direction={"vertical"}
-          className="p-4 w-full max-h-[372px] h-full rounded-xl bg-black"
+          className="px-4 w-full max-h-[372px] h-full rounded-xl bg-black"
           slidesPerView={"auto"}
           mousewheel={true}
         >
@@ -21,11 +21,7 @@ const TransactionHistory: React.FC = () => {
             <SwiperSlide
               key={item}
               className={`flex items-center h-[auto] gap-2 py-2 px-1 border-b border-white/15 ${
-                i === 0
-                  ? "pt-0"
-                  : i === arr.length - 1
-                  ? "pb-0 border-none"
-                  : ""
+                i === arr.length - 1 ? "border-none" : ""
               }`}
             >
               <div className="w-[40px] flex-none h-[40px] rounded-full bg-white/15 flex items-center justify-center">
