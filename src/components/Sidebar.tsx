@@ -8,7 +8,7 @@ const Sidebar: React.FC = () => {
   return (
     <div className="flex">
       <div
-        className={`bg-background fixed border-r-[0.5px] border-white/10 h-screen transition-all duration-300 z-10 ${
+        className={`bg-[#131313] fixed z-[1000] border-r-[0.5px] border-white/10 h-screen transition-all duration-300 ${
           isOpen ? "w-72" : "w-[88px] overflow-hidden"
         }`}
       >
