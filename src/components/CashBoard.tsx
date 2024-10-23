@@ -1,8 +1,11 @@
 import React from "react";
 import CashDash from "../assets/CashDash-min (1).webp";
 import Profile from "../assets/profile.png";
+import { RootState } from "../store";
+import { useSelector } from "react-redux";
 
 const CashBoard: React.FC = () => {
+  const count = useSelector((state: RootState) => state?.cashCounter?.value);
   return (
     <div className="col-span-2 flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
       <div className="max-w-[438px]">
@@ -51,7 +54,7 @@ const CashBoard: React.FC = () => {
           </div>
           <div className="w-1/2">
             <div className="text-xs font-light">Current Balance</div>
-            <div className="text-xl font-bold">Rs. 10000</div>
+            <div className="text-xl font-bold">Rs. {count}</div>
           </div>
         </div>
         <div className="flex mt-auto gap-4 font-semibold">
