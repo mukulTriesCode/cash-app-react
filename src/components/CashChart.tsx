@@ -17,7 +17,7 @@ Chart.register(
   LineElement
 );
 
-const BarChart: React.FC = () => {
+const CashChart: React.FC = () => {
   const [chartType, setChartType] = useState<"bar" | "line">("bar");
   const data = [
     { label: "Jan", value: 0 },
@@ -125,4 +125,4 @@ const BarChart: React.FC = () => {
   );
 };
 
-export default BarChart;
+export default CashChart;
