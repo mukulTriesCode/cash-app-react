@@ -8,7 +8,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="grid grid-cols-3 gap-8 p-7">
       <CashBoard />
-      <BarChart chartType="bar" />
+      <BarChart />
       <CategorySlider />
       <TransactionHistory />
     </div>
