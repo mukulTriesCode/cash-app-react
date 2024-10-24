@@ -5,7 +5,7 @@ import { RootState } from "../store";
 import { useSelector } from "react-redux";
 
 const CashBoard: React.FC = () => {
-  const count = useSelector((state: RootState) => state?.cashCounter?.value);
+  const count = useSelector((state: RootState) => state?.root?.value);
   return (
     <div className="col-span-2 flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
       <div className="max-w-[438px]">

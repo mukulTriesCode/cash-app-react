@@ -5,7 +5,7 @@ import { incrementByAmount } from "../features/cashCountSlice";
 import Sidebar from "../components/Sidebar";
 
 const CashCounter: React.FC = () => {
-  const count = useSelector((state: RootState) => state?.cashCounter?.value);
+  const count = useSelector((state: RootState) => state?.root?.value);
   const dispatch = useDispatch();
   const [cash, setCash] = useState(0);
 
