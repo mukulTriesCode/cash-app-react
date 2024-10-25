@@ -1,19 +1,27 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Path from "./pages/Path";
 import Layout from "./components/Layout";
-import CashCounter from "./pages/CashCounter";
+import AddEntry from "./pages/AddEntry";
+import Category from "./pages/Category";
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 function App() {
   return (
     <Layout>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" index element={<Home />} />
-          <Route path="/path" element={<Path />} />
-          <Route path="/cash" element={<CashCounter />} />
-          <Route path="*" element={<h1>404</h1>} />
-        </Routes>
+        <Sidebar />
+        <div className="ms-[88px]">
+          <Navbar />
+          <div className="pt-[95px]">
+            <Routes>
+              <Route path="/" index element={<Home />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/add-entry" element={<AddEntry />} />
+              <Route path="*" element={<h1>404</h1>} />
+            </Routes>
+          </div>
+        </div>
       </BrowserRouter>
     </Layout>
   );
