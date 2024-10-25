@@ -1,8 +1,12 @@
 import React from "react";
 import CashDash from "../assets/CashDash-min (1).webp";
 import Profile from "../assets/profile.png";
+import { RootState } from "../store";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const CashBoard: React.FC = () => {
+  const count = useSelector((state: RootState) => state?.root?.value);
   return (
     <div className="col-span-2 flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
       <div className="max-w-[438px]">
@@ -51,14 +55,14 @@ const CashBoard: React.FC = () => {
           </div>
           <div className="w-1/2">
             <div className="text-xs font-light">Current Balance</div>
-            <div className="text-xl font-bold">Rs. 10000</div>
+            <div className="text-xl font-bold">Rs. {count}</div>
           </div>
         </div>
-        <div className="flex mt-auto gap-4 font-semibold">
-          <button className="w-full transition-all bg-white/70 text-black hover:bg-white py-2 px-4 rounded">
-            View Rewards
-          </button>
-          <button className="w-full transition-all bg-transparent border border-white text-white hover:text-white/70 hover:border-white/10 hover:bg-gradient-to-bl to-gradient-red/40 from-gradient-blue/40 py-2 px-4 rounded">
+        <div className="flex mt-auto gap-4 font-semibold text-center">
+          <Link to={'/add-entry'} className="w-full transition-all bg-white/70 text-black hover:bg-white py-2 px-4 rounded">
+            Add Entry
+          </Link>
+          <button className="w-full transition-all bg-transparent border border-white text-white hover:text-white/70 hover:border-white/10 hover:bg-white hover:text-black to-gradient-red/40 from-gradient-blue/40 py-2 px-4 rounded">
             View Collection
           </button>
         </div>

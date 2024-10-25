@@ -6,6 +6,13 @@ import ValContext from "../helpers/Context/ValContext";
 const Sidebar: React.FC = () => {
   const context = useContext(ValContext);
   const { val, toggleVal } = context || {};
+
+  const navLinks = [
+    { path: "/", label: "Home", icon: homeLogo },
+    { path: "/category", label: "Category", icon: homeLogo },
+    { path: "/add-entry", label: "Add Entry", icon: homeLogo },
+  ];
+
   return (
     <div className="flex">
       <div
@@ -56,40 +63,26 @@ const Sidebar: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col flex-nowrap items-center px-3">
-          <Link
-            to="/"
-            className={`${
-              val ? "justify-start gap-4" : ""
-            } flex transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
-          >
-            <div className="h-[22px] w-[22px]">
-              <img className="w-full h-auto" src={homeLogo} alt="home" />
-            </div>
-            <span
-              className={`transition-all ${
-                val ? "w-auto opacity-100" : "w-0 opacity-0"
-              }`}
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`${
+                val ? "justify-start gap-4" : ""
+              } flex transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
             >
-              Home
-            </span>
-          </Link>
-          <Link
-            to="/path"
-            className={`${
-              val ? "justify-start gap-4" : ""
-            } flex transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
-          >
-            <div className="h-[22px] w-[22px]">
-              <img className="w-full h-auto" src={homeLogo} alt="home" />
-            </div>
-            <span
-              className={`transition-all ${
-                val ? "w-auto opacity-100" : "w-0 opacity-0"
-              }`}
-            >
-              Path
-            </span>
-          </Link>
+              <div className="h-[22px] w-[22px]">
+                <img className="w-full h-auto" src={link.icon} alt={link.label} />
+              </div>
+              <span
+                className={`transition-all ${
+                  val ? "w-auto opacity-100" : "w-0 opacity-0"
+                } line-clamp-1`}
+              >
+                {link.label}
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
