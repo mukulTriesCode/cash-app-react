@@ -9,8 +9,8 @@ const Sidebar: React.FC = () => {
 
   const navLinks = [
     { path: "/", label: "Home", icon: homeLogo },
-    { path: "/path", label: "Path", icon: homeLogo },
-    { path: "/cash", label: "Cash", icon: homeLogo },
+    { path: "/category", label: "Category", icon: homeLogo },
+    { path: "/add-entry", label: "Add Entry", icon: homeLogo },
   ];
 
   return (
@@ -77,7 +77,7 @@ const Sidebar: React.FC = () => {
               <span
                 className={`transition-all ${
                   val ? "w-auto opacity-100" : "w-0 opacity-0"
-                }`}
+                } line-clamp-1`}
               >
                 {link.label}
               </span>
