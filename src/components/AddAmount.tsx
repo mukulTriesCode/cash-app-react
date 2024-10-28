@@ -86,6 +86,7 @@ const AddAmount: React.FC = () => {
           onChange={(date) => {
             // Check if date is a valid Date object
             if (date instanceof Date && !isNaN(date.getTime())) {
+              // @ts-expect-error undefined type
               setEntry((prev) => ({ ...prev, date }));
             }
           }}
