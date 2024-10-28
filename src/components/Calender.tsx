@@ -13,8 +13,20 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-function CalenderComponent() {
+interface CalenderComponentProps {
+  onChange: (date: Date) => void;
+}
+
+const CalenderComponent: React.FC<CalenderComponentProps> = ({ onChange }) => {
   const [date, setDate] = React.useState<Date>();
+
+  // Update the date and call onChange when a date is selected
+  const handleDateChange = (selectedDate: Date | undefined) => {
+    if (selectedDate) { // Check if selectedDate is defined
+      setDate(selectedDate);
+      onChange(selectedDate); // Call onChange with the new date
+    }
+  };
 
   return (
     <Popover>
@@ -37,7 +49,7 @@ function CalenderComponent() {
         <Calendar
           mode="single"
           selected={date}
-          onSelect={setDate}
+          onSelect={handleDateChange}
           initialFocus
           className="bg-[#131313] text-white rounded-md"
         />
