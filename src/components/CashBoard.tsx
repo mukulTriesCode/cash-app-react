@@ -62,7 +62,7 @@ const CashBoard: React.FC = () => {
           <Link to={'/add-entry'} className="w-full transition-all bg-white/70 text-black hover:bg-white py-2 px-4 rounded">
             Add Entry
           </Link>
-          <button className="w-full transition-all bg-transparent border border-white text-white hover:text-white/70 hover:border-white/10 hover:bg-white hover:text-black to-gradient-red/40 from-gradient-blue/40 py-2 px-4 rounded">
+          <button className="w-full transition-all bg-transparent border border-white text-white hover:border-white/10 hover:bg-white hover:text-black to-gradient-red/40 from-gradient-blue/40 py-2 px-4 rounded">
             View Collection
           </button>
         </div>
