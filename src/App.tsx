@@ -6,12 +6,21 @@ import AddEntry from "./pages/AddEntry";
 import Category from "./pages/Category";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import background from "./assets/Dashboard-min (1).webp";
+
 function App() {
   return (
     <Layout>
       <BrowserRouter>
         <Sidebar />
-        <div className="ms-[88px]">
+        <div className="ms-[88px] relative">
+          <div className="absolute z-[-1] top-0 left-0 w-full h-screen opacity-10">
+            <img
+              className="w-full h-full object-cover"
+              src={background}
+              alt="bg"
+            />
+          </div>
           <Navbar />
           <div className="pt-[95px]">
             <Routes>

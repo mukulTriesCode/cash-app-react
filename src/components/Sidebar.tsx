@@ -69,9 +69,9 @@ const Sidebar: React.FC = () => {
               to={link.path}
               className={`${
                 val ? "justify-start gap-4" : ""
-              } flex transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
+              } flex items-baseline transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
             >
-              <div className="h-[22px] w-[22px]">
+              <div className="h-[22px] w-[22px] flex-none">
                 <img className="w-full h-auto" src={link.icon} alt={link.label} />
               </div>
               <span
