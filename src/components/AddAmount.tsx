@@ -44,7 +44,7 @@ const AddAmount: React.FC = () => {
     }
   };
   return (
-    <div className="flex gap-4 flex-col max-w-[400px] border border-white/15 p-4 rounded-md bg-[#131313]">
+    <div className="flex gap-4 flex-col w-full border border-white/15 p-4 rounded-md bg-[#131313]">
       <div className="flex flex-col gap-2">
         <label htmlFor="counter" className="py-1 flex gap-3">
           <p>Enter cash amount</p>
@@ -78,13 +78,13 @@ const AddAmount: React.FC = () => {
       </div>
       <div className="flex gap-4">
         <button
-          className={`w-full max-w-[250px] text-center px-4 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg cursor-pointer`}
+          className={`w-full text-center px-4 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg cursor-pointer`}
           onClick={handleAddAmount}
         >
           Cash In
         </button>
         <button
-          className={`w-full max-w-[250px] text-center px-4 py-3 bg-red-700 hover:bg-red-800 transition rounded-lg cursor-pointer`}
+          className={`w-full text-center px-4 py-3 bg-red-700 hover:bg-red-800 transition rounded-lg cursor-pointer`}
           onClick={handleRemoveAmount}
         >
           Cash Out
