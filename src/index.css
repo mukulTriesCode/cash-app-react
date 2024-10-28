@@ -83,3 +83,23 @@ body {
 input[type="number"]::-webkit-inner-spin-button {
   @apply hidden;
 }
+
+/* width */
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-gray-200 rounded;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-[#3f3f3f] rounded;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-900;
+}
