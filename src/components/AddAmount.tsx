@@ -5,6 +5,14 @@ import {
   incrementByAmount,
 } from "../features/cashCountSlice";
 import CalenderComponent from "@/components/Calender";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 const AddAmount: React.FC = () => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState<{ amount?: string }>({});
@@ -75,6 +83,19 @@ const AddAmount: React.FC = () => {
           onChange={handleCashChange}
         />
         <CalenderComponent />
+        <label htmlFor="notes" className="py-1">
+          <p>Select a category (optional)</p>
+        </label>
+        <Select>
+          <SelectTrigger className="bg-transparent h-auto text-base border border-white/15 p-3 px-5 rounded-md">
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent className="bg-[#131313] border-white/15 text-white w-full">
+            <SelectItem className="hover:[&&]:bg-[#2e2e2e] [&&]:text-white [&&]:bg-[#131313] hover:[&&]:text-white p-3 px-5" value="light">Light</SelectItem>
+            <SelectItem className="hover:[&&]:bg-[#2e2e2e] hover:[&&]:text-white p-3 px-5" value="dark">Dark</SelectItem>
+            <SelectItem className="hover:[&&]:bg-[#2e2e2e] hover:[&&]:text-white p-3 px-5" value="system">System</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex gap-4">
         <button
