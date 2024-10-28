@@ -1,32 +1,49 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+export interface Entry {
+  id: string;
+  amount: number;
+  date: string;
+  notes: string;
+  category: string;
+}
 
 export interface CashCounterState {
-  value: number;
-  notes?: string;
+  totalAmount: number;
+  entries: Entry[];
+  categories?: {
+    id: string;
+    name: string;
+  }[];
 }
 
 const initialState: CashCounterState = {
-  value: 0,
-  notes: "",
+  totalAmount: 0,
+  entries: [],
+  categories: [],
 };
 
 export const cashCountSlice = createSlice({
   name: "cashCounter",
   initialState,
   reducers: {
-    incrementByAmount: (state, action: PayloadAction<{ amount: number; notes?: string }>) => {
-      state.value += action.payload.amount;
-      state.notes = action.payload.notes || state.notes;
+    cashIn: (state, action: PayloadAction<{ entries: Entry[] }>) => {
+      const entry = action.payload.entries[0];
+      if (entry) {
+        state.totalAmount += entry.amount;
+        state.entries.push(entry);
+      }
     },
-    decrementByAmount: (state, action: PayloadAction<{ amount: number; notes?: string }>) => {
-      state.value -= action.payload.amount;
-      state.notes = action.payload.notes || state.notes;
+    cashOut: (state, action: PayloadAction<{ entries: Entry[] }>) => {
+      const entry = action.payload.entries[0];
+      if (entry) {
+        state.totalAmount -= entry.amount;
+        state.entries.push(entry);
+      }
     },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { incrementByAmount, decrementByAmount } = cashCountSlice.actions;
+export const { cashIn, cashOut } = cashCountSlice.actions;
 
 export default cashCountSlice.reducer;
