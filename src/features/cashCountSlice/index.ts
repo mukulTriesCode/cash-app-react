@@ -6,13 +6,13 @@ export interface Entry {
   date: string;
   notes: string;
   category: string;
+  isCashIn: boolean | null;
 }
 
 export interface CashCounterState {
   totalAmount: number;
   entries: Entry[];
   categories?: {
-    id: string;
     name: string;
   }[];
 }
@@ -27,23 +27,24 @@ export const cashCountSlice = createSlice({
   name: "cashCounter",
   initialState,
   reducers: {
-    cashIn: (state, action: PayloadAction<{ entries: Entry[] }>) => {
+    addEntry: (
+      state,
+      action: PayloadAction<{ entries: Entry[]; isCashIn: boolean }>
+    ) => {
       const entry = action.payload.entries[0];
       if (entry) {
-        state.totalAmount += entry.amount;
+        state.totalAmount += action.payload.isCashIn
+          ? entry.amount
+          : -entry.amount;
         state.entries.push(entry);
-      }
-    },
-    cashOut: (state, action: PayloadAction<{ entries: Entry[] }>) => {
-      const entry = action.payload.entries[0];
-      if (entry) {
-        state.totalAmount -= entry.amount;
-        state.entries.push(entry);
+        if (!state.categories?.some((val) => val?.name === entry?.category)) {
+          state.categories?.push({ name: entry?.category });
+        }
       }
     },
   },
 });
 
-export const { cashIn, cashOut } = cashCountSlice.actions;
+export const { addEntry } = cashCountSlice.actions;
 
 export default cashCountSlice.reducer;
