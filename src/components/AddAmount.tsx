@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-  decrementByAmount,
-  incrementByAmount,
-} from "../features/cashCountSlice";
+import { useDispatch, useSelector } from "react-redux";
+import * as cashCountSlice from "../features/cashCountSlice";
 import CalenderComponent from "@/components/Calender";
 import {
   Select,
@@ -12,101 +9,147 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RootState } from "@/store/cashStore";
 
 const AddAmount: React.FC = () => {
   const dispatch = useDispatch();
+  const entryData = useSelector((state: RootState) => state.root);
+
   const [errors, setErrors] = useState<{ amount?: string }>({});
   const initialState = {
+    id: "",
     amount: 0,
     notes: "",
+    date: "",
+    category: "",
   };
-  const [entry, setEntry] = useState({ ...initialState });
+  const [entry, setEntry] = useState(initialState);
 
-  const handleCashChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "counter") {
-      setEntry((prev) => ({ ...prev, amount: Number(e.target.value) }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEntry((prev) => ({
+      ...prev,
+      [name]: name === "amount" ? Number(value) : value,
+    }));
+    if (name === "amount") {
       setErrors((prev) => ({ ...prev, amount: "" }));
-    } else if (e.target.name === "notes") {
-      setEntry((prev) => ({ ...prev, notes: e.target.value }));
     }
   };
 
-  const handleAddAmount = () => {
-    if (entry?.amount) {
+  const handleSelectCategory = (value: string) => {
+    setEntry((prev) => ({ ...prev, category: value }));
+  };
+
+  const handleAmountChange = (isCashOut: boolean) => {
+    if (entry.amount > 0) {
+      const action = isCashOut
+        ? cashCountSlice.addEntry
+        : cashCountSlice.addEntry;
       dispatch(
-        incrementByAmount({ amount: entry?.amount, notes: entry?.notes })
+        action({
+          entries: [
+            {
+              ...entry,
+              id: `INV${entryData?.entries.length}`,
+              isCashIn: !isCashOut,
+            },
+          ],
+          isCashIn: !isCashOut,
+        })
       );
       setEntry(initialState);
-      setErrors((prev) => ({ ...prev, amount: "" }));
+      setErrors({});
     } else {
-      setErrors((prev) => ({ ...prev, amount: "Please enter the amount" }));
+      setErrors({ amount: "Please enter a valid amount" });
     }
   };
 
-  const handleRemoveAmount = () => {
-    if (entry?.amount) {
-      dispatch(
-        decrementByAmount({ amount: entry?.amount, notes: entry?.notes })
-      );
-      setEntry(initialState);
-    }
-  };
   return (
     <div className="flex gap-4 flex-col w-full border border-white/15 p-4 rounded-md bg-[#131313]">
       <div className="flex flex-col gap-2">
-        <label htmlFor="counter" className="py-1 flex gap-3">
-          <p>Enter cash amount</p>
-          {errors?.amount && (
-            <p className="text-red-600">( {errors?.amount} )</p>
-          )}
+        <label htmlFor="amount" className="py-1 flex gap-3">
+          <p>Enter cash amount : *</p>
+          {errors.amount && <p className="text-red-600">({errors.amount})</p>}
         </label>
         <input
           className={`bg-transparent border border-white/15 p-3 px-5 rounded-md ${
-            errors?.amount ? "border-red-600" : ""
+            errors.amount ? "border-red-600" : ""
           }`}
           type="number"
-          name="counter"
-          id="counter"
+          name="amount"
+          id="amount"
           placeholder="--"
-          value={entry?.amount ? entry?.amount : ""}
-          onChange={handleCashChange}
+          value={entry.amount || ""}
+          onChange={handleChange}
         />
         <label htmlFor="notes" className="py-1">
-          <p>Enter a note (optional)</p>
+          <p>Enter a note :</p>
         </label>
         <input
           className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
           type="text"
           name="notes"
           id="notes"
-          value={entry?.notes}
-          onChange={handleCashChange}
+          value={entry.notes}
+          onChange={handleChange}
         />
-        <CalenderComponent />
-        <label htmlFor="notes" className="py-1">
-          <p>Select a category (optional)</p>
+        <CalenderComponent
+          onChange={(date) => {
+            if (date instanceof Date && !isNaN(date.getTime())) {
+              // @ts-expect-error undefined type
+              setEntry((prev) => ({ ...prev, date }));
+            }
+          }}
+        />
+        <label htmlFor="category" className="py-1">
+          <p>Add / Select a category :</p>
         </label>
-        <Select>
+        <Select onValueChange={handleSelectCategory}>
+          <input
+            type="text"
+            onChange={(e) => handleSelectCategory(e.target.value)}
+            placeholder="Add Category"
+            className="bg-transparent h-auto text-base border border-white/15 p-3 px-5 rounded-md placeholder:text-white"
+          />
           <SelectTrigger className="bg-transparent h-auto text-base border border-white/15 p-3 px-5 rounded-md">
-            <SelectValue placeholder="Select" />
+            <SelectValue placeholder="Select Category" />
+            <input
+              type="text"
+              onChange={(e) => handleSelectCategory(e.target.value)}
+              className="bg-transparent border-none p-0 m-0"
+            />
           </SelectTrigger>
           <SelectContent className="bg-[#131313] border-white/15 text-white w-full">
-            <SelectItem className="hover:[&&]:bg-[#2e2e2e] [&&]:text-white [&&]:bg-[#131313] hover:[&&]:text-white p-3 px-5" value="light">Light</SelectItem>
-            <SelectItem className="hover:[&&]:bg-[#2e2e2e] hover:[&&]:text-white p-3 px-5" value="dark">Dark</SelectItem>
-            <SelectItem className="hover:[&&]:bg-[#2e2e2e] hover:[&&]:text-white p-3 px-5" value="system">System</SelectItem>
+            <SelectItem className="hover:bg-[#2e2e2e] p-3 px-5" value="--">
+              --
+            </SelectItem>
+            {entryData?.categories &&
+              entryData?.categories?.length > 0 &&
+              entryData?.categories.map((category) => (
+                <React.Fragment key={category?.name}>
+                  {category?.name && (
+                    <SelectItem
+                      className="hover:bg-[#2e2e2e] p-3 px-5"
+                      value={category?.name.toLowerCase()}
+                    >
+                      {category?.name}
+                    </SelectItem>
+                  )}
+                </React.Fragment>
+              ))}
           </SelectContent>
         </Select>
       </div>
       <div className="flex gap-4">
         <button
-          className={`w-full text-center px-4 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg cursor-pointer`}
-          onClick={handleAddAmount}
+          className="w-full text-center px-4 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg cursor-pointer"
+          onClick={() => handleAmountChange(false)}
         >
           Cash In
         </button>
         <button
-          className={`w-full text-center px-4 py-3 bg-red-700 hover:bg-red-800 transition rounded-lg cursor-pointer`}
-          onClick={handleRemoveAmount}
+          className="w-full text-center px-4 py-3 bg-red-700 hover:bg-red-800 transition rounded-lg cursor-pointer"
+          onClick={() => handleAmountChange(true)}
         >
           Cash Out
         </button>

@@ -13,14 +13,25 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-function CalenderComponent() {
+interface CalenderComponentProps {
+  onChange: (date: Date) => void;
+}
+
+const CalenderComponent: React.FC<CalenderComponentProps> = ({ onChange }) => {
   const [date, setDate] = React.useState<Date>();
+
+  const handleDateChange = (selectedDate: Date | undefined) => {
+    if (selectedDate) {
+      setDate(selectedDate);
+      onChange(selectedDate);
+    }
+  };
 
   return (
     <Popover>
       <PopoverTrigger className="text-start">
         <>
-          <p className="py-1 mb-2">Enter the date</p>
+          <p className="py-1 mb-2">Enter the date :</p>
           <Button
             variant={"outline"}
             className={cn(
@@ -29,7 +40,7 @@ function CalenderComponent() {
             )}
           >
             <CalendarIcon />
-            {date ? format(date, "PPP") : <span>Date Picker</span>}
+            {date ? format(date, "PPP") : <span>Select date</span>}
           </Button>
         </>
       </PopoverTrigger>
@@ -37,7 +48,7 @@ function CalenderComponent() {
         <Calendar
           mode="single"
           selected={date}
-          onSelect={setDate}
+          onSelect={handleDateChange}
           initialFocus
           className="bg-[#131313] text-white rounded-md"
         />
