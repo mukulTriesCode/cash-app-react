@@ -19,13 +19,13 @@ const TotalData: React.FC = () => {
                   (val, i, arr) => i === arr.length - 1 && val?.amount
                 )[0]?.amount
               }{" "}
-              (
-              {
-                cashEntry?.entries?.filter(
+              {cashEntry?.entries?.filter(
+                (val, i, arr) => i === arr.length - 1 && val?.notes
+              )[0]?.notes && (
+                `(${cashEntry?.entries?.filter(
                   (val, i, arr) => i === arr.length - 1 && val?.notes
-                )[0]?.notes
-              }
-              )
+                )[0]?.notes})`
+              )}
             </>
           )}
         </p>
