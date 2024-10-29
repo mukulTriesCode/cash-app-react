@@ -20,11 +20,10 @@ interface CalenderComponentProps {
 const CalenderComponent: React.FC<CalenderComponentProps> = ({ onChange }) => {
   const [date, setDate] = React.useState<Date>();
 
-  // Update the date and call onChange when a date is selected
   const handleDateChange = (selectedDate: Date | undefined) => {
-    if (selectedDate) { // Check if selectedDate is defined
+    if (selectedDate) {
       setDate(selectedDate);
-      onChange(selectedDate); // Call onChange with the new date
+      onChange(selectedDate);
     }
   };
 
@@ -32,7 +31,7 @@ const CalenderComponent: React.FC<CalenderComponentProps> = ({ onChange }) => {
     <Popover>
       <PopoverTrigger className="text-start">
         <>
-          <p className="py-1 mb-2">Enter the date</p>
+          <p className="py-1 mb-2">Enter the date :</p>
           <Button
             variant={"outline"}
             className={cn(
@@ -41,7 +40,7 @@ const CalenderComponent: React.FC<CalenderComponentProps> = ({ onChange }) => {
             )}
           >
             <CalendarIcon />
-            {date ? format(date, "PPP") : <span>Date Picker</span>}
+            {date ? format(date, "PPP") : <span>Select date</span>}
           </Button>
         </>
       </PopoverTrigger>
