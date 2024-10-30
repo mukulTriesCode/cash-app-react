@@ -1,0 +1,13 @@
+Todo
+-Configure the charts
+-Filter transaction list according to cash in and out
+-Add category and category slug page (Default category and other category list)
+-Add transaction list page
+-Search Entries, Categories
+-Search Page
+-Notifications (Low balance, Milestones)
+-Profile
+-Login, logout, signup
+-Authenication
+-Add CRUD
+-Backend configuration (PostgreSQL & NodeJS)
