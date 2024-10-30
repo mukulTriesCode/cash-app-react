@@ -9,7 +9,7 @@ const CashBoard: React.FC = () => {
   const count = useSelector((state: RootState) => state?.root?.totalAmount);
   return (
     <div className="col-span-2 flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
-      <div className="max-w-[438px]">
+      <div className="max-w-[438px] w-full aspect-[219/200]">
         <img
           className="-translate-x-8 translate-y-6 scale-110"
           src={CashDash}
