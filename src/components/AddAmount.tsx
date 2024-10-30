@@ -15,7 +15,7 @@ const AddAmount: React.FC = () => {
   const dispatch = useDispatch();
   const entryData = useSelector((state: RootState) => state.root);
 
-  const [errors, setErrors] = useState<{ amount?: string }>({});
+  const [errors, setErrors] = useState<{ amount?: string; notes?: string }>({});
   const initialState = {
     id: "",
     amount: 0,
@@ -41,7 +41,7 @@ const AddAmount: React.FC = () => {
   };
 
   const handleAmountChange = (isCashOut: boolean) => {
-    if (entry.amount > 0) {
+    if (entry.amount > 0 && entry.notes.length > 0) {
       const action = isCashOut
         ? cashCountSlice.addEntry
         : cashCountSlice.addEntry;
@@ -60,7 +60,11 @@ const AddAmount: React.FC = () => {
       setEntry(initialState);
       setErrors({});
     } else {
-      setErrors({ amount: "Please enter a valid amount" });
+      setErrors((prev) => ({
+        ...prev,
+        amount: entry.amount <= 0 ? "Please enter a valid amount" : "",
+        notes: entry.notes.length <= 0 ? "Please enter a note" : "",
+      }));
     }
   };
 
@@ -82,14 +86,16 @@ const AddAmount: React.FC = () => {
           value={entry.amount || ""}
           onChange={handleChange}
         />
-        <label htmlFor="notes" className="py-1">
+        <label htmlFor="notes" className="py-1 flex gap-3">
           <p>Enter a note :</p>
+          {errors.notes && <p className="text-red-600">({errors.notes})</p>}
         </label>
         <input
           className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
           type="text"
           name="notes"
           id="notes"
+          placeholder="--"
           value={entry.notes}
           onChange={handleChange}
         />
@@ -113,14 +119,12 @@ const AddAmount: React.FC = () => {
           />
           <SelectTrigger className="bg-transparent h-auto text-base border border-white/15 p-3 px-5 rounded-md">
             <SelectValue placeholder="Select Category" />
-            <input
-              type="text"
-              onChange={(e) => handleSelectCategory(e.target.value)}
-              className="bg-transparent border-none p-0 m-0"
-            />
           </SelectTrigger>
           <SelectContent className="bg-[#131313] border-white/15 text-white w-full">
-            <SelectItem className="hover:bg-[#2e2e2e] p-3 px-5" value="--">
+            <SelectItem
+              className="[&&]:bg-[#131313] hover:[&&]:bg-[#2e2e2e] [&&]:text-white hover:[&&]:text-white transition p-3 px-5"
+              value="--"
+            >
               --
             </SelectItem>
             {entryData?.categories &&
@@ -129,7 +133,7 @@ const AddAmount: React.FC = () => {
                 <React.Fragment key={category?.name}>
                   {category?.name && (
                     <SelectItem
-                      className="hover:bg-[#2e2e2e] p-3 px-5"
+                      className="[&&]:bg-[#131313] hover:[&&]:bg-[#2e2e2e] [&&]:text-white hover:[&&]:text-white transition p-3 px-5"
                       value={category?.name.toLowerCase()}
                     >
                       {category?.name}
