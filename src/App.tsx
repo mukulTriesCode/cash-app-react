@@ -14,11 +14,13 @@ function App() {
       <BrowserRouter>
         <Sidebar />
         <div className="ms-[88px] relative">
-          <div className="absolute z-[-1] top-0 left-0 w-full h-screen opacity-10">
+          <div className="absolute z-[-1] top-0 left-0 w-full min-h-screen h-full opacity-10">
             <img
               className="w-full h-full object-cover"
               src={background}
               alt="bg"
+              loading="eager"
+              decoding="async"
             />
           </div>
           <Navbar />

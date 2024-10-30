@@ -55,6 +55,7 @@ const CashChart: React.FC = () => {
       </span>
       <label htmlFor="chart-type">
         <input
+          aria-label={item?.label}
           type="radio"
           name="chart-type"
           value={item.type}
