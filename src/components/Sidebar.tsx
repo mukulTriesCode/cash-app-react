@@ -23,6 +23,8 @@ const Sidebar: React.FC = () => {
         <div className={`flex-1 p-4 py-6 ml-0 z-10`}>
           <div className="ml-auto">
             <button
+              id="breadcrumb"
+              aria-label="breadcrumb"
               className="transition-all bg-purple-shade hover:bg-purple-shade/90 font-bold py-3 px-4 rounded-lg"
               onClick={() => {
                 if (toggleVal) {
@@ -63,7 +65,7 @@ const Sidebar: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col flex-nowrap items-center px-3">
-          {navLinks.map((link) => (
+          {navLinks.map((link, i) => (
             <Link
               key={link.path}
               to={link.path}
@@ -72,7 +74,11 @@ const Sidebar: React.FC = () => {
               } flex items-baseline transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
             >
               <div className="h-[22px] w-[22px] flex-none">
-                <img className="w-full h-auto" src={link.icon} alt={link.label} />
+                <img
+                  className="w-full h-auto"
+                  src={link.icon}
+                  alt={link.label + i}
+                />
               </div>
               <span
                 className={`transition-all ${
