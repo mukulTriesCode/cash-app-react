@@ -1,3 +1,4 @@
+import { CrossSVG } from "@/lib/Svgs";
 import React, { Dispatch, SetStateAction } from "react";
 
 const NotificationModal: React.FC<{
@@ -27,20 +28,7 @@ const NotificationModal: React.FC<{
                 notification(false);
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 inline-block -mt-1 mr-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <CrossSVG />
             </button>
           </div>
           <div className="gap-1 flex-col max-h-[400px] overflow-y-scroll">
