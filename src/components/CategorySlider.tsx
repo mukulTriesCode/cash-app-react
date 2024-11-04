@@ -10,7 +10,9 @@ const CategorySlider: React.FC = () => {
   const swiperRef = useRef<SwiperRef>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const { categories } = useSelector((state: RootState) => state?.root);
+  const { categories, entries } = useSelector(
+    (state: RootState) => state?.root
+  );
   // const images = [
   //   "../assets/art1.webp",
   //   "../assets/art2.webp",
@@ -81,11 +83,19 @@ const CategorySlider: React.FC = () => {
           spaceBetween={26}
           slidesPerView={"auto"}
         >
-          {categories?.map((category, index) => (
-            <SwiperSlide className="max-w-[242px]" key={index}>
-              <CategoryCard category={category} />
-            </SwiperSlide>
-          ))}
+          {categories?.map((category, index) => {
+            const categoryTotal = entries
+              ?.filter((entry) => entry?.category === category?.name)
+              .reduce((total, val) => total + (val?.amount || 0), 0);
+            return (
+              <SwiperSlide className="max-w-[242px]" key={index}>
+                <CategoryCard
+                  category={category}
+                  categoryTotal={categoryTotal}
+                />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       ) : (
         <div className="w-full h-[370px] mt-6 grid place-items-center text-xl">
