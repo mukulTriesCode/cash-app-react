@@ -1,52 +1,101 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel } from "swiper/modules";
 import "swiper/css";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Entry } from "@/features/cashCountSlice";
+import { emojis } from "@/lib/utils";
 
 const TransactionHistory: React.FC = () => {
   const { entries } = useSelector((state: RootState) => state?.root);
-  const emojis = [
-    "🥳",
-    "🎉",
-    "🎊",
-    "🎈",
-    "🍾",
-    "🥂",
-    "🍻",
-    "🎂",
-    "🍰",
-    "🪅",
-    "🎶",
-    "🎵",
-    "🎤",
-    "🎧",
-    "🎷",
-    "🎸",
-    "🎺",
-    "🥁",
-    "🎹",
-    "🕺",
-    "💃",
-    "👯‍♂️",
-    "👯‍♀️",
-    "🎇",
-    "🎆",
-    "🍸",
-    "🍹",
-    "🍷",
-    "🍕",
-    "🌟",
+  const [filteredEntries, setFilteredEntries] = useState<Entry[]>(entries);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [isFilterSelected, setIsFilterSelected] = useState(false);
+  const filterItems = [
+    { label: "Cash In", id: "cash-in" },
+    { label: "Cash Out", id: "cash-out" },
   ];
+
+  const handleFilterChange = (filterId: string) => {
+    const filteredEntries = entries.filter((entry) =>
+      filterId === "cash-in"
+        ? entry.isCashIn
+        : filterId === "cash-out"
+        ? !entry.isCashIn
+        : null
+    );
+    setFilteredEntries(filteredEntries);
+    setFilterOpen(false);
+    setIsFilterSelected(true);
+  };
+
+  const handleClearFilter = () => {
+    setFilteredEntries(entries);
+    setIsFilterSelected(false);
+  }
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-2xl font-bold leading-[2.375rem]">
-        Transaction History
-      </h2>
+      <div className="flex justify-between pe-3">
+        <h2 className="text-2xl font-bold leading-[2.375rem]">
+          Transaction History
+        </h2>
+        <div className="flex items-center gap-3">
+          {isFilterSelected && (
+            <p onClick={handleClearFilter} className="hover:underline underline-offset-8 cursor-pointer text-red-500">( Clear )</p>
+          )}
+          <Popover open={filterOpen} onOpenChange={setFilterOpen}>
+            <PopoverTrigger asChild>
+              <div className="flex items-center w-6 cursor-pointer relative">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="Layer_1"
+                  data-name="Layer 1"
+                  viewBox="0 0 24 24"
+                  width="200"
+                  height="200"
+                  version="1.1"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  className="w-full h-auto"
+                >
+                  <g width="100%" height="100%" transform="matrix(1,0,0,1,0,0)">
+                    <path
+                      d="M24,3.5c0,.83-.67,1.5-1.5,1.5H1.5c-.83,0-1.5-.67-1.5-1.5s.67-1.5,1.5-1.5H22.5c.83,0,1.5,.67,1.5,1.5ZM14.5,20h-5c-.83,0-1.5,.67-1.5,1.5s.67,1.5,1.5,1.5h5c.83,0,1.5-.67,1.5-1.5s-.67-1.5-1.5-1.5Zm4-9H5.5c-.83,0-1.5,.67-1.5,1.5s.67,1.5,1.5,1.5h13c.83,0,1.5-.67,1.5-1.5s-.67-1.5-1.5-1.5Z"
+                      fill="#ffffff"
+                      fillOpacity="1"
+                      data-original-color="#000000ff"
+                      stroke="none"
+                      strokeOpacity="1"
+                    />
+                  </g>
+                </svg>
+              </div>
+            </PopoverTrigger>
+            <PopoverContent
+              className="border-none p-0 text-white text-xl bg-none"
+              align="start"
+            >
+              <div className="z-20 absolute bottom-0 right-0 translate-y-full -translate-x-1/4 rounded-md border border-white/15 bg-[#131313]">
+                {filterItems?.map((val, i, arr) => (
+                  <div
+                    key={val?.id}
+                    className={`cursor-pointer px-5 py-2 hover:bg-[#232323] transition ${
+                      i === arr.length - 1 ? "" : "border-b border-white/15"
+                    }`}
+                    onClick={() => handleFilterChange(val?.id)}
+                  >
+                    {val?.label}
+                  </div>
+                ))}
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
+      </div>
       <div className="bg-gradient-to-bl from-gradient-red/40 to-gradient-blue/40 p-[2px] rounded-xl shadow-lg h-full">
-        {entries?.length > 0 ? (
+        {filteredEntries?.length > 0 ? (
           <Swiper
             data-lenis-prevent
             modules={[Mousewheel]}
@@ -55,7 +104,7 @@ const TransactionHistory: React.FC = () => {
             slidesPerView={"auto"}
             mousewheel={true}
           >
-            {entries.slice(0,20).map((val, i, arr) => (
+            {filteredEntries.slice(0, 20).map((val, i, arr) => (
               <SwiperSlide
                 key={val?.id}
                 className={`flex items-center h-[auto] gap-2 py-2 px-1 border-b border-white/15 ${
@@ -63,7 +112,13 @@ const TransactionHistory: React.FC = () => {
                 }`}
               >
                 <div className="w-[40px] flex-none h-[40px] rounded-full bg-white/15 flex items-center justify-center">
-                  {emojis[i]}
+                  {
+                    emojis[
+                      val?.notes?.length > emojis.length
+                        ? val?.notes?.length - emojis.length
+                        : val?.notes?.length
+                    ]
+                  }
                 </div>
                 <div className="flex justify-between w-full items-center">
                   <div className="flex flex-col justify-center gap-2">
