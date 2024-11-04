@@ -40,7 +40,8 @@ const CashBoard: React.FC = () => {
             className="w-14 h-14 rounded-full object-cover"
             src={Profile}
             alt="Profile Image"
-            fetchPriority="high"
+            // @ts-expect-error invalid prop
+            fetchpriority="high"
             rel="preload"
           />
           <span className="ml-4 text-lg font-medium">
