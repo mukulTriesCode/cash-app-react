@@ -24,7 +24,7 @@ const TransactionList: React.FC = () => {
               <li className="col-span-2">
                 {val?.date ? new Date(val?.date).toLocaleDateString() : "--"}
               </li>
-              <li className="col-span-2">
+              <li className="col-span-2 capitalize">
                 {val?.category ? val?.category : "--"}
               </li>
               <li

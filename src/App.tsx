@@ -2,8 +2,10 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
-import AddEntry from "./pages/AddEntry";
-import Category from "./pages/Category";
+import { lazy, Suspense } from "react";
+
+const Category = lazy(() => import("./pages/Category"));
+const AddEntry = lazy(() => import("./pages/AddEntry"));
 
 function App() {
   return (
@@ -11,8 +13,22 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/category" element={<Category />} />
-          <Route path="/add-entry" element={<AddEntry />} />
+          <Route
+            path="/category"
+            element={
+              <Suspense fallback={<></>}>
+                <Category />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/add-entry"
+            element={
+              <Suspense fallback={<></>}>
+                <AddEntry />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<h1>404</h1>} />
         </Route>
       </Routes>
