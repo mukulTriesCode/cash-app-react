@@ -24,6 +24,7 @@ const Layout: React.FC = () => {
                   alt="bg"
                   loading="eager"
                   decoding="async"
+                  rel="preload"
                 />
               </div>
               <Navbar />
