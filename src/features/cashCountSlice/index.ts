@@ -37,7 +37,11 @@ export const cashCountSlice = createSlice({
           ? entry.amount
           : -entry.amount;
         state.entries.push(entry);
-        if (!state.categories?.some((val) => val?.name === entry?.category)) {
+        if (
+          !state.categories?.some(
+            (val) => val?.name.toLowerCase() === entry?.category.toLowerCase()
+          )
+        ) {
           state.categories?.push({ name: entry?.category });
         }
       }
