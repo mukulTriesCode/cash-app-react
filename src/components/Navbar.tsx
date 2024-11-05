@@ -14,7 +14,9 @@ const Navbar: React.FC = () => {
               placeholder="Search"
               className="w-full p-4 py-3 pr-10 rounded-lg bg-[#a2a3a446] text-white/75 outline-none focus:ring-2 focus:ring-white/50"
             />
-            <SearchSVG />
+            <span className="cursor-pointer">
+              <SearchSVG />
+            </span>
           </div>
           <div className="flex items-center gap-9">
             <div

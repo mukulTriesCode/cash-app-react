@@ -1,10 +1,13 @@
 import React from "react";
 import Category from "../assets/Category.png";
+import { emojis } from "@/lib/utils";
 
 const CategoryCard: React.FC<{
   category: { name: string };
   categoryTotal: number;
-}> = ({ category, categoryTotal }) => {
+  index: number;
+  length: number;
+}> = ({ category, categoryTotal, index, length }) => {
   return (
     <div className="bg-gradient-to-bl from-gradient-red/20 to-gradient-blue/20 p-[1px] rounded-xl shadow-lg">
       <div className="p-4 rounded-xl bg-black">
@@ -15,7 +18,10 @@ const CategoryCard: React.FC<{
         />
         <div className="mt-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold capitalize">{category?.name}</h3>
+            <h3 className="text-lg font-bold capitalize">
+              {category?.name}
+              {emojis[length > emojis.length ? length - emojis.length : index]}
+            </h3>
           </div>
           <p className="text-sm text-gray-400 mt-2">Total amount</p>
           <p className="text-lg font-bold">₹ {categoryTotal}</p>

@@ -41,6 +41,7 @@ const AddAmount: React.FC = () => {
   };
 
   const handleAmountChange = (isCashOut: boolean) => {
+    const categoryInput = document.getElementById("category-input") as HTMLSelectElement;
     if (entry.amount > 0 && entry.notes.length > 0) {
       const action = isCashOut
         ? cashCountSlice.addEntry
@@ -58,6 +59,7 @@ const AddAmount: React.FC = () => {
         })
       );
       setEntry(initialState);
+      categoryInput.value = "";
       setErrors({});
     } else {
       setErrors((prev) => ({
@@ -113,6 +115,7 @@ const AddAmount: React.FC = () => {
         <Select onValueChange={handleSelectCategory}>
           <input
             type="text"
+            id="category-input"
             onChange={(e) => handleSelectCategory(e.target.value)}
             placeholder="Add Category"
             className="bg-transparent h-auto text-base border border-white/15 p-3 px-5 rounded-md placeholder:text-white"
@@ -133,7 +136,7 @@ const AddAmount: React.FC = () => {
                 <React.Fragment key={category?.name}>
                   {category?.name && (
                     <SelectItem
-                      className="[&&]:bg-[#131313] hover:[&&]:bg-[#2e2e2e] [&&]:text-white hover:[&&]:text-white transition p-3 px-5"
+                      className="[&&]:bg-[#131313] hover:[&&]:bg-[#2e2e2e] [&&]:text-white hover:[&&]:text-white transition p-3 px-5 capitalize"
                       value={category?.name.toLowerCase()}
                     >
                       {category?.name}
