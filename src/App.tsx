@@ -11,53 +11,41 @@ const App = () => {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      {isSidebarOpen && (
-        <div
-          className={`fixed w-full top-0 left-0 h-full bg-gray-800 text-white transition duration-300 ease-in-out ${
-            isSidebarOpen ? " translate-x-0" : "-translate-x-full"
-          }`}
-        >
-          <div className="relative">
-            <button
-              onClick={toggleSidebar}
-              className={`${
-                isSidebarOpen ? "block" : "hidden"
-              } absolute top-4 left-4 p-3 text-2xl text-gray-700 bg-white rounded-full shadow-md focus:outline-none z-50`}
-            >
-              <HiCheck />
-            </button>
-          </div>
-          <div className="p-8">
-            <h2 className="text-2xl font-bold">Sidebar</h2>
-            <ul className="overflow-y-scroll h-[calc(100vh-300px)]">
-              <li className="mt-4">Home</li>
-              <li className="mt-4">About</li>
-              <li className="mt-4">Services</li>
-              <li className="mt-4">Contact</li>
-              <li className="mt-4">Home</li>
-              <li className="mt-4">About</li>
-              <li className="mt-4">Services</li>
-              <li className="mt-4">Contact</li>
-              <li className="mt-4">Home</li>
-              <li className="mt-4">About</li>
-              <li className="mt-4">Services</li>
-              <li className="mt-4">Contact</li>
-              <li className="mt-4">Home</li>
-              <li className="mt-4">About</li>
-              <li className="mt-4">Services</li>
-              <li className="mt-4">Contact</li>
-              <li className="mt-4">Home</li>
-              <li className="mt-4">About</li>
-              <li className="mt-4">Services</li>
-              <li className="mt-4">Contact</li>
-              <li className="mt-4">Home</li>
-              <li className="mt-4">About</li>
-              <li className="mt-4">Services</li>
-              <li className="mt-4">Contact</li>
-            </ul>
-          </div>
+      <div
+        className={`fixed w-full top-0 left-0 h-full bg-gray-800 text-white transition duration-300 ease-in-out ${
+          isSidebarOpen ? " translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="p-8">
+          <h2 className="text-2xl font-bold">Sidebar</h2>
+          <ul className="overflow-y-scroll h-[calc(100vh-300px)]">
+            <li className="mt-4">Home</li>
+            <li className="mt-4">About</li>
+            <li className="mt-4">Services</li>
+            <li className="mt-4">Contact</li>
+            <li className="mt-4">Home</li>
+            <li className="mt-4">About</li>
+            <li className="mt-4">Services</li>
+            <li className="mt-4">Contact</li>
+            <li className="mt-4">Home</li>
+            <li className="mt-4">About</li>
+            <li className="mt-4">Services</li>
+            <li className="mt-4">Contact</li>
+            <li className="mt-4">Home</li>
+            <li className="mt-4">About</li>
+            <li className="mt-4">Services</li>
+            <li className="mt-4">Contact</li>
+            <li className="mt-4">Home</li>
+            <li className="mt-4">About</li>
+            <li className="mt-4">Services</li>
+            <li className="mt-4">Contact</li>
+            <li className="mt-4">Home</li>
+            <li className="mt-4">About</li>
+            <li className="mt-4">Services</li>
+            <li className="mt-4">Contact</li>
+          </ul>
         </div>
-      )}
+      </div>
 
       {/* Main Content */}
       <div className="flex-1 p-6 h-[200vh]">
@@ -65,10 +53,10 @@ const App = () => {
         <button
           onClick={toggleSidebar}
           className={`${
-            isSidebarOpen ? "hidden" : "block"
-          } fixed top-4 left-4 p-3 text-2xl text-gray-700 bg-white rounded-full shadow-md focus:outline-none z-50`}
+            isSidebarOpen ? "opacity-100" : "opacity-100"
+          } fixed top-4 left-4 p-3 text-2xl duration-500 transition text-gray-700 bg-white rounded-full shadow-md focus:outline-none z-50`}
         >
-          <HiOutlineMenu />
+          {isSidebarOpen ? <HiOutlineMenu /> : <HiCheck />}
         </button>
 
         <h1 className="text-3xl">Welcome to My Website</h1>
