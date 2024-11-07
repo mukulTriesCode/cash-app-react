@@ -12,7 +12,7 @@ const App = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <div
-        className={`fixed w-full top-0 left-0 h-full bg-gray-800 text-white transition duration-300 ease-in-out ${
+        className={`fixed w-full top-0 left-0 z-20 h-full bg-gray-800 text-white transition duration-300 ease-in-out ${
           isSidebarOpen ? " translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -50,6 +50,7 @@ const App = () => {
       {/* Main Content */}
       <div className="flex-1 p-6 h-[200vh]">
         {/* Hamburger Icon (Sticky) */}
+        <div className="fixed top-0 left-0 w-full bg-slate-500 py-10"></div>
         <button
           onClick={toggleSidebar}
           className={`${
@@ -59,7 +60,7 @@ const App = () => {
           {!isSidebarOpen ? <HiOutlineMenu /> : <HiCheck />}
         </button>
 
-        <h1 className="text-3xl pt-12">Welcome to My Website</h1>
+        <h1 className="text-3xl pt-20">Welcome to My Website</h1>
         <p className="mt-4">
           This is the main content area. The sidebar will slide in when the
           hamburger icon is clicked.
