@@ -18,7 +18,7 @@ const App = () => {
       >
         <div className="p-8 pt-20">
           <h2 className="text-2xl font-bold">Sidebar</h2>
-          <ul className="overflow-y-scroll h-[calc(100vh-300px)]">
+          <ul className="overflow-y-scroll h-[calc(100vh-150px)]">
             <li className="mt-4">Home</li>
             <li className="mt-4">About</li>
             <li className="mt-4">Services</li>
