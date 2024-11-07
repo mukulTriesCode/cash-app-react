@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiCheck, HiOutlineMenu } from "react-icons/hi"; // Import the hamburger icon from react-icons
 
 const App = () => {
@@ -56,7 +56,7 @@ const App = () => {
             isSidebarOpen ? "opacity-100" : "opacity-100"
           } fixed top-4 left-4 p-3 text-2xl duration-500 transition text-gray-700 bg-white rounded-full shadow-md focus:outline-none z-50`}
         >
-          {isSidebarOpen ? <HiOutlineMenu /> : <HiCheck />}
+          {!isSidebarOpen ? <HiOutlineMenu /> : <HiCheck />}
         </button>
 
         <h1 className="text-3xl pt-12">Welcome to My Website</h1>
