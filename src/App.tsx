@@ -16,7 +16,7 @@ const App = () => {
           isSidebarOpen ? " translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-8">
+        <div className="p-8 pt-20">
           <h2 className="text-2xl font-bold">Sidebar</h2>
           <ul className="overflow-y-scroll h-[calc(100vh-300px)]">
             <li className="mt-4">Home</li>
@@ -59,7 +59,7 @@ const App = () => {
           {isSidebarOpen ? <HiOutlineMenu /> : <HiCheck />}
         </button>
 
-        <h1 className="text-3xl">Welcome to My Website</h1>
+        <h1 className="text-3xl pt-12">Welcome to My Website</h1>
         <p className="mt-4">
           This is the main content area. The sidebar will slide in when the
           hamburger icon is clicked.
