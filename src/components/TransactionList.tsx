@@ -15,7 +15,7 @@ const TransactionList: React.FC = () => {
         <li className="col-span-2">Category</li>
         <li className="col-span-2">Amount</li>
       </TList>
-      <ul data-lenis-prevent className="h-[590px] overflow-y-scroll">
+      <ul data-lenis-prevent className="h-[590px] overflow-y-auto">
         {entries?.map((val) => (
           <li key={val?.id}>
             <TList>

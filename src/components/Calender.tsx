@@ -55,6 +55,6 @@ const CalenderComponent: React.FC<CalenderComponentProps> = ({ onChange }) => {
       </PopoverContent>
     </Popover>
   );
-}
+};
 
 export default CalenderComponent;

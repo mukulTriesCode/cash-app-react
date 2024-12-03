@@ -15,8 +15,8 @@ const TransactionVerticalSlider: React.FC<{ filteredEntries: Entry[] }> = ({
           data-lenis-prevent
           modules={[Mousewheel]}
           direction={"vertical"}
-          className="px-4 w-full max-h-[372px] h-full rounded-xl bg-black"
-          slidesPerView={"auto"}
+          className="px-4 w-full max-h-[352px] h-full rounded-xl bg-black"
+          slidesPerView={4}
           mousewheel={true}
         >
           {filteredEntries.slice(0, 20).map((val, i, arr) => (

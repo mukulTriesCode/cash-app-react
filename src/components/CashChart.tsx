@@ -8,6 +8,10 @@ import {
   LineElement,
 } from "chart.js";
 import { Bar, Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/cashStore";
+import { months } from "@/lib/utils";
+import { Entry } from "@/features/cashCountSlice";
 
 Chart.register(
   CategoryScale,
@@ -19,28 +23,60 @@ Chart.register(
 
 const CashChart: React.FC = () => {
   const [chartType, setChartType] = useState<"bar" | "line">("bar");
-  const data = [
-    { label: "Jan", value: 0 },
-    { label: "Feb", value: 10 },
-    { label: "Mar", value: 5 },
-    { label: "Apr", value: 2 },
-    { label: "May", value: 20 },
-    { label: "Jun", value: 30 },
-    { label: "Jul", value: 45 },
-    { label: "Aug", value: 42 },
-    { label: "Sep", value: 48 },
-    { label: "Oct", value: 50 },
-    { label: "Nov", value: 60 },
-    { label: "Dec", value: 70 },
-  ];
+  const { entries } = useSelector((state: RootState) => state?.root);
 
-  const labels = data.map((item) => item.label);
-  const values = data.map((item) => item.value);
+  const monthData = entries.reduce((acc: { month: string; amount: number }[], entry: Entry) => {
+    const monthIndex = Number(entry.date.split("/")[0]) - 1;
+    const monthLabel = months[monthIndex]?.label;
+    const existingMonth = acc.find(item => item.month === monthLabel);
+    if (existingMonth) {
+      existingMonth.amount += entry.isCashIn ? entry.amount : -entry.amount;
+    } else {
+      acc.push({
+        month: monthLabel,
+        amount: entry.isCashIn ? entry.amount : -entry.amount,
+      });
+    }
+    return acc;
+  }, []);
+
+  const monthEntries = months.map((month) => {
+    const monthAmount = monthData.find(item => item.month === month.label)?.amount || 0;
+    return { month: month.label, amount: monthAmount };
+  });
+
+  const data = monthEntries.map(item => ({
+    month: item.month,
+    amount: item.amount,
+  }));
+
+  const labels = data.map((item) => item.month);
+  const amounts = data.map((item) => item.amount);
 
   const chartTypes = [
     { type: "bar", label: "Bar Graph" },
     { type: "line", label: "Line Chart" },
   ];
+
+  const chartData = {
+    labels: labels,
+    datasets: [
+      {
+        label: "My First dataset",
+        backgroundColor: "#34D178",
+        borderColor: "#34D178",
+        data: amounts,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
 
   const chartTypeOptions = chartTypes.map((item) => (
     <div
@@ -67,60 +103,17 @@ const CashChart: React.FC = () => {
     </div>
   ));
 
-  const chartComponents: Record<"bar" | "line", JSX.Element> = {
-    bar: (
-      <Bar
-        data={{
-          labels: labels,
-          datasets: [
-            {
-              label: "My First dataset",
-              backgroundColor: "#34D178",
-              borderColor: "#34D178",
-              data: values,
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        }}
-      />
-    ),
-    line: (
-      <Line
-        data={{
-          labels: labels,
-          datasets: [
-            {
-              label: "My First dataset",
-              backgroundColor: "#34D178",
-              borderColor: "#34D178",
-              data: values,
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        }}
-      />
-    ),
-  };
-
   return (
     <div className="bg-gradient-to-bl from-gradient-red/40 to-gradient-blue/40 p-[2px] rounded-xl shadow-lg">
       <div className="p-4 w-full h-full rounded-xl bg-black flex flex-col justify-between">
         <div className="inline-flex items-center justify-center gap-2">
           {chartTypeOptions}
         </div>
-        {chartComponents[chartType]}
+        {chartType === "bar" ? (
+          <Bar data={chartData} options={chartOptions} />
+        ) : (
+          <Line data={chartData} options={chartOptions} />
+        )}
       </div>
     </div>
   );

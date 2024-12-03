@@ -41,11 +41,12 @@ const AddAmount: React.FC = () => {
   };
 
   const handleAmountChange = (isCashOut: boolean) => {
-    const categoryInput = document.getElementById("category-input") as HTMLSelectElement;
+    console.log("entry", entry);
+    const categoryInput = document.getElementById(
+      "category-input"
+    ) as HTMLSelectElement;
     if (entry.amount > 0 && entry.notes.length > 0) {
-      const action = isCashOut
-        ? cashCountSlice.addEntry
-        : cashCountSlice.addEntry;
+      const action = cashCountSlice.addEntry;
       dispatch(
         action({
           entries: [
@@ -103,10 +104,7 @@ const AddAmount: React.FC = () => {
         />
         <CalenderComponent
           onChange={(date) => {
-            if (date instanceof Date && !isNaN(date.getTime())) {
-              // @ts-expect-error undefined type
-              setEntry((prev) => ({ ...prev, date }));
-            }
+            setEntry((prev) => ({ ...prev, date: date.toLocaleDateString() }));
           }}
         />
         <label htmlFor="category" className="py-1">
