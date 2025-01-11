@@ -10,7 +10,7 @@ const CashBoard: React.FC = () => {
   const { totalAmount, entries } = useSelector(
     (state: RootState) => state?.root
   );
-  const openingBalance = entries[0]?.amount;
+  const openingBalance = entries.length > 0 ? entries[0].amount : 0;
 
   return (
     <div className="col-span-2 flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
