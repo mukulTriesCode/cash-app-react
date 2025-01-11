@@ -7,7 +7,11 @@ import { Link } from "react-router-dom";
 import { HeartSVG } from "@/lib/Svgs";
 
 const CashBoard: React.FC = () => {
-  const count = useSelector((state: RootState) => state?.root?.totalAmount);
+  const { totalAmount, entries } = useSelector(
+    (state: RootState) => state?.root
+  );
+  const openingBalance = entries[0]?.amount;
+
   return (
     <div className="col-span-2 flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
       <div className="max-w-[438px] w-full aspect-[219/200]">
@@ -41,11 +45,11 @@ const CashBoard: React.FC = () => {
         <div className="flex justify-between mt-7">
           <div className="w-1/2">
             <div className="text-xs font-light">Opening Balance</div>
-            <div className="text-xl font-bold">Rs. 8143</div>
+            <div className="text-xl font-bold">Rs. {openingBalance || "--"}</div>
           </div>
           <div className="w-1/2">
             <div className="text-xs font-light">Current Balance</div>
-            <div className="text-xl font-bold">Rs. {count}</div>
+            <div className="text-xl font-bold">Rs. {totalAmount || "--"}</div>
           </div>
         </div>
         <div className="flex mt-auto gap-4 font-semibold text-center">
