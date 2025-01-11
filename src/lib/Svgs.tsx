@@ -178,6 +178,12 @@ export const ProfileSVG: React.FC = () => {
 
 export const ArrowUpIcon: React.FC = () => {
   return (
-    <div className="absolute z-10 bg-primary border-t-2 border-l-2 border-white/50 h-[15px] w-[15px] rotate-45 top-[calc(100%+17px)] -translate-y-[9px] left-full -translate-x-[calc(100%+15px)]"></div>
+    <div
+      className="absolute z-10 border-t-2 border-l-2 border-[#878B95] h-[15px] w-[15px] rotate-45 top-[calc(100%+17.2px)] -translate-y-[9px] left-full -translate-x-[calc(100%+15px)]"
+      style={{
+        backgroundImage:
+          "linear-gradient(to bottom right, hsl(var(--primary)) 50%, transparent 50%)",
+      }}
+    ></div>
   );
 };
