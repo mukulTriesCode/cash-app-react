@@ -6,6 +6,7 @@ import { lazy, Suspense } from "react";
 
 const Category = lazy(() => import("./pages/Category"));
 const AddEntry = lazy(() => import("./pages/AddEntry"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
             element={
               <Suspense fallback={<></>}>
                 <AddEntry />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Suspense fallback={<></>}>
+                <Profile />
               </Suspense>
             }
           />
