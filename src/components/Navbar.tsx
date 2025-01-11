@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NotificationModal from "./NotificationModal";
 import { ArrowUpIcon, BellSVG, ProfileSVG, SearchSVG } from "@/lib/Svgs";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -42,17 +43,24 @@ const Navbar: React.FC = () => {
               className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center cursor-pointer relative"
             >
               <ProfileSVG />
-              <div className={`absolute top-full right-0 ${isProfileClicked ? "block" : "hidden"}`}>
+              <div
+                className={`absolute top-full right-0 ${
+                  isProfileClicked ? "block" : "hidden"
+                }`}
+              >
                 <ArrowUpIcon />
                 <div className="absolute w-[250px] right-0 translate-x-1 top-[calc(100%+15px)] rounded-xl bg-primary overflow-hidden border-2 border-white/50 flex flex-col">
                   <ul>
-                    <li className="px-4 hover:bg-slate-800 py-2 border-b border-b-white/50">
-                      deml
-                    </li>
-                    <li className="px-4 hover:bg-slate-800 py-2 border-b border-b-white/50">
-                      deml
-                    </li>
-                    <li className="px-4 hover:bg-slate-800 py-2">deml</li>
+                    <Link to={"/profile"}>
+                      <li className="px-4 hover:bg-slate-800 py-2 border-b border-b-white/50">
+                        Visit Profile
+                      </li>
+                    </Link>
+                    <Link to={"/"}>
+                      <li className="px-4 hover:bg-slate-800 py-2">
+                        Logout
+                      </li>
+                    </Link>
                   </ul>
                 </div>
               </div>
