@@ -175,3 +175,9 @@ export const ProfileSVG: React.FC = () => {
     </svg>
   );
 };
+
+export const ArrowUpIcon: React.FC = () => {
+  return (
+    <div className="absolute z-10 bg-primary border-t-2 border-l-2 border-white/50 h-[15px] w-[15px] rotate-45 top-[calc(100%+17px)] -translate-y-[9px] left-full -translate-x-[calc(100%+15px)]"></div>
+  );
+};
