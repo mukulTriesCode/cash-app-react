@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import { lazy, Suspense } from "react";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const Category = lazy(() => import("./pages/Category"));
 const AddEntry = lazy(() => import("./pages/AddEntry"));
@@ -35,6 +37,22 @@ function App() {
             element={
               <Suspense fallback={<></>}>
                 <Profile />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<></>}>
+                <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/sign-up"
+            element={
+              <Suspense fallback={<></>}>
+                <SignUp />
               </Suspense>
             }
           />
