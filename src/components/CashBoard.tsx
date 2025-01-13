@@ -5,10 +5,14 @@ import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HeartSVG } from "@/lib/Svgs";
+import { ProfileRootState } from "@/store/profileStore";
 
 const CashBoard: React.FC = () => {
   const { totalAmount, entries } = useSelector(
     (state: RootState) => state?.root
+  );
+  const { username, email } = useSelector(
+    (state: ProfileRootState) => state.root
   );
   const openingBalance = entries.length > 0 ? entries[0].amount : 0;
 
@@ -38,14 +42,16 @@ const CashBoard: React.FC = () => {
             rel="preload"
           />
           <span className="ml-4 text-lg font-medium">
-            <div className="text-sm">Mukul Sharma</div>
-            <div className="text-xs font-light">@mukulsharma</div>
+            <div className="text-sm">{username || "Mukul Sharma"}</div>
+            <div className="text-xs font-light">{email || "@mukulsharma"}</div>
           </span>
         </div>
         <div className="flex justify-between mt-7">
           <div className="w-1/2">
             <div className="text-xs font-light">Opening Balance</div>
-            <div className="text-xl font-bold">Rs. {openingBalance || "--"}</div>
+            <div className="text-xl font-bold">
+              Rs. {openingBalance || "--"}
+            </div>
           </div>
           <div className="w-1/2">
             <div className="text-xs font-light">Current Balance</div>
