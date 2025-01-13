@@ -5,10 +5,7 @@ export interface UserInterface {
   username: string;
   email: string;
   password: string;
-}
-
-export interface LogoutInterface {
-  logout: () => void;
+  logout?: () => void;
 }
 
 const initialState: UserInterface = {
@@ -28,11 +25,14 @@ export const profileSlice = createSlice({
       state.email = action.payload.email;
       state.password = action.payload.password;
     },
-    logoutProfile: (state) => {
-      state.id = "";
-      state.username = "";
-      state.email = "";
-      state.password = "";
+    logoutProfile: (state, action: PayloadAction<UserInterface>) => {
+      if (action.payload?.logout) {
+        action.payload.logout();
+        state.id = "";
+        state.username = "";
+        state.email = "";
+        state.password = "";
+      }
     },
   },
 });
