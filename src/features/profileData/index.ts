@@ -7,6 +7,10 @@ export interface UserInterface {
   password: string;
 }
 
+export interface LogoutInterface {
+  logout: () => void;
+}
+
 const initialState: UserInterface = {
   id: "",
   username: "",
@@ -23,6 +27,12 @@ export const profileSlice = createSlice({
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.password = action.payload.password;
+    },
+    logoutProfile: (state) => {
+      state.id = "";
+      state.username = "";
+      state.email = "";
+      state.password = "";
     },
   },
 });
