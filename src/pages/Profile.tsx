@@ -7,12 +7,14 @@ const Profile: React.FC = () => {
     (state: ProfileRootState) => state.root
   );
   return (
-    <div>
-      <h1>Profile</h1>
-      <p>ID: {id}</p>
-      <p>Username: {username}</p>
-      <p>Email: {email}</p>
-      <p>Password: {password}</p>
+    <div className="p-4">
+      <div className="max-w-[500px] p-4 mx-auto border flex flex-col gap-4">
+        <h4 className="text-3xl">Your Profile</h4>
+        <p className="text-xl">ID: {id}</p>
+        <p className="text-xl">Username: {username}</p>
+        <p className="text-xl">Email: {email}</p>
+        <p className="text-xl">Password: {password}</p>
+      </div>
     </div>
   );
 };
