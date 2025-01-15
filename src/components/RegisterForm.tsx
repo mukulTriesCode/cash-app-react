@@ -36,12 +36,13 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="w-fit">
       <form
         onSubmit={handleSubmit}
         action="GET"
         className="max-w-[400px] flex gap-4 flex-col w-full border border-white/15 py-5 m-4 px-4 rounded-md bg-[#131313]"
       >
+        <h5 className="text-center text-2xl">Sign Up</h5>
         <input
           className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
           type="text"
