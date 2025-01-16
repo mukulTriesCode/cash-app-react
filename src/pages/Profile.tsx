@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const Profile: React.FC = () => {
   const { id, username, email, password } = useSelector(
-    (state: ProfileRootState) => state.root
+    (state: ProfileRootState) => state.profileRoot
   );
   return (
     <div className="p-4">
