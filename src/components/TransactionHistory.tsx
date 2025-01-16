@@ -10,7 +10,8 @@ const TransactionVerticalSlider = lazy(
 );
 
 const TransactionHistory: React.FC = () => {
-  const { entries } = useSelector((state: RootState) => state?.root);
+  const root = useSelector((state: RootState) => state?.root);
+  const entries = root?.entries || [];
   const [filteredEntries, setFilteredEntries] = useState<Entry[]>(entries);
   const [filterOpen, setFilterOpen] = useState(false);
   const [isFilterSelected, setIsFilterSelected] = useState(false);
@@ -80,7 +81,13 @@ const TransactionHistory: React.FC = () => {
         </div>
       </div>
       <div className="bg-gradient-to-bl from-gradient-red/40 to-gradient-blue/40 p-[2px] rounded-xl shadow-lg h-full">
-        <Suspense fallback={<div className="w-full max-h-[372px] h-full rounded-xl bg-black grid place-items-center">Loading...</div>}>
+        <Suspense
+          fallback={
+            <div className="w-full max-h-[372px] h-full rounded-xl bg-black grid place-items-center">
+              Loading...
+            </div>
+          }
+        >
           <TransactionVerticalSlider filteredEntries={filteredEntries} />
         </Suspense>
       </div>

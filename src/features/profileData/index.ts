@@ -25,14 +25,11 @@ export const profileSlice = createSlice({
       state.email = action.payload.email;
       state.password = action.payload.password;
     },
-    logoutProfile: (state, action: PayloadAction<UserInterface>) => {
-      if (action.payload?.logout) {
-        action.payload.logout();
-        state.id = "";
-        state.username = "";
-        state.email = "";
-        state.password = "";
-      }
+    logoutProfile: (state) => {
+      state.id = "";
+      state.username = "";
+      state.email = "";
+      state.password = "";
     },
   },
 });

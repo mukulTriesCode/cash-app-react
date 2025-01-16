@@ -1,14 +1,9 @@
 import { profileSlice } from "@/features/profileData";
-import { ProfileRootState } from "@/store/profileStore";
 import React, { FormEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
-  const { id, username, email, password } = useSelector(
-    (state: ProfileRootState) => state.root
-  );
-  console.log("root :>> ", id, username, email, password);
   const [formData, setFormData] = useState({
     id: "",
     username: "",
@@ -27,7 +22,6 @@ const RegisterForm: React.FC = () => {
     e.preventDefault();
     console.log("formData :>> ", formData);
     const action = profileSlice.actions.addProfile;
-    console.log('action :>> ', action);
     const updatedFormData = {
       ...formData,
       id: Math.random().toString(36).substr(2, 9), // Using a random string for id

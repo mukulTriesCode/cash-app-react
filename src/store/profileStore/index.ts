@@ -13,15 +13,15 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "root",
+  key: "profileRoot",
   storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, profileData);
 
-export const store = configureStore({
+export const profileStore = configureStore({
   reducer: {
-    root: persistedReducer,
+    profileRoot: persistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -31,8 +31,8 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+export const profilePersistor = persistStore(profileStore);
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type ProfileRootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+export type ProfileRootState = ReturnType<typeof profileStore.getState>;
+// Inferred type: {profileRoot: ProfileDataState}
+export type AppDispatch = typeof profileStore.dispatch;

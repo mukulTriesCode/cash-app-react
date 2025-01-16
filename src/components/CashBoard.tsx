@@ -8,12 +8,14 @@ import { HeartSVG } from "@/lib/Svgs";
 import { ProfileRootState } from "@/store/profileStore";
 
 const CashBoard: React.FC = () => {
-  const { totalAmount, entries } = useSelector(
-    (state: RootState) => state?.root
+  const root = useSelector((state: RootState) => state?.root);
+  const profileRoot = useSelector(
+    (state: ProfileRootState) => state.profileRoot
   );
-  const { username, email } = useSelector(
-    (state: ProfileRootState) => state.root
-  );
+  const username = profileRoot?.username;
+  const email = profileRoot?.email;
+  const totalAmount = root?.totalAmount;
+  const entries = root?.entries || [];
   const openingBalance = entries.length > 0 ? entries[0].amount : 0;
 
   return (
