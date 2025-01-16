@@ -23,29 +23,33 @@ Chart.register(
 
 const CashChart: React.FC = () => {
   const [chartType, setChartType] = useState<"bar" | "line">("bar");
-  const { entries } = useSelector((state: RootState) => state?.root);
-
-  const monthData = entries.reduce((acc: { month: string; amount: number }[], entry: Entry) => {
-    const monthIndex = Number(entry.date.split("/")[0]) - 1;
-    const monthLabel = months[monthIndex]?.label;
-    const existingMonth = acc.find(item => item.month === monthLabel);
-    if (existingMonth) {
-      existingMonth.amount += entry.isCashIn ? entry.amount : -entry.amount;
-    } else {
-      acc.push({
-        month: monthLabel,
-        amount: entry.isCashIn ? entry.amount : -entry.amount,
-      });
-    }
-    return acc;
-  }, []);
+  const root = useSelector((state: RootState) => state?.root);
+  const entries = root?.entries || [];
+  const monthData = entries.reduce(
+    (acc: { month: string; amount: number }[], entry: Entry) => {
+      const monthIndex = Number(entry.date.split("/")[0]) - 1;
+      const monthLabel = months[monthIndex]?.label;
+      const existingMonth = acc.find((item) => item.month === monthLabel);
+      if (existingMonth) {
+        existingMonth.amount += entry.isCashIn ? entry.amount : -entry.amount;
+      } else {
+        acc.push({
+          month: monthLabel,
+          amount: entry.isCashIn ? entry.amount : -entry.amount,
+        });
+      }
+      return acc;
+    },
+    []
+  );
 
   const monthEntries = months.map((month) => {
-    const monthAmount = monthData.find(item => item.month === month.label)?.amount || 0;
+    const monthAmount =
+      monthData.find((item) => item.month === month.label)?.amount || 0;
     return { month: month.label, amount: monthAmount };
   });
 
-  const data = monthEntries.map(item => ({
+  const data = monthEntries.map((item) => ({
     month: item.month,
     amount: item.amount,
   }));
