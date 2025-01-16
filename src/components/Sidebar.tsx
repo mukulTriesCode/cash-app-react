@@ -12,6 +12,9 @@ const Sidebar: React.FC = () => {
     { path: "/", label: "Home", icon: homeLogo },
     { path: "/category", label: "Category", icon: homeLogo },
     { path: "/add-entry", label: "Add Entry", icon: homeLogo },
+    { path: "/profile", label: "Profile", icon: homeLogo },
+    { path: "/sign-up", label: "Sign Up", icon: homeLogo },
+    { path: "/login", label: "Login", icon: homeLogo },
   ];
 
   return (

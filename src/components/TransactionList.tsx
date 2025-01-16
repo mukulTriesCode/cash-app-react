@@ -3,9 +3,9 @@ import React, { ReactNode } from "react";
 import { useSelector } from "react-redux";
 
 const TransactionList: React.FC = () => {
-  const { totalAmount, entries } = useSelector(
-    (state: RootState) => state?.root
-  );
+  const root = useSelector((state: RootState) => state?.root);
+  const totalAmount = root?.totalAmount;
+  const entries = root?.entries || [];
   return (
     <div className="p-4 h-full border border-white/15 rounded-md bg-[#131313] text-base">
       <TList className="text-white/80 text-sm pt-0 border-white/50">

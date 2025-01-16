@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import NotificationModal from "./NotificationModal";
 import { ArrowUpIcon, BellSVG, ProfileSVG, SearchSVG } from "@/lib/Svgs";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { profileSlice } from "@/features/profileData";
 
 const Navbar: React.FC = () => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
+
+  const dispatch = useDispatch();
+  const action = profileSlice.actions.logoutProfile;
+  const logOut = () => {
+    dispatch(action());
+  };
 
   const handleProfileDropdown = () => {
     setIsProfileClicked(!isProfileClicked);
@@ -56,11 +64,9 @@ const Navbar: React.FC = () => {
                         Visit Profile
                       </li>
                     </Link>
-                    <Link to={"/"}>
-                      <li className="px-4 hover:bg-slate-800 py-2">
-                        Logout
-                      </li>
-                    </Link>
+                    <div onClick={() => logOut()}>
+                      <li className="px-4 hover:bg-slate-800 py-2">Logout</li>
+                    </div>
                   </ul>
                 </div>
               </div>

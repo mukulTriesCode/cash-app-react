@@ -10,9 +10,9 @@ const CategorySlider: React.FC = () => {
   const swiperRef = useRef<SwiperRef>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const { categories, entries } = useSelector(
-    (state: RootState) => state?.root
-  );
+  const root = useSelector((state: RootState) => state.root);
+  const categories = root?.categories || [];
+  const entries = root?.entries || [];
   // const images = [
   //   "../assets/art1.webp",
   //   "../assets/art2.webp",
@@ -86,7 +86,11 @@ const CategorySlider: React.FC = () => {
           {categories?.map((category, index, arr) => {
             const categoryTotal = entries
               ?.filter((entry) => entry?.category === category?.name)
-              .reduce((total, val) => total + (val?.isCashIn ? val?.amount : -val?.amount || 0), 0);
+              .reduce(
+                (total, val) =>
+                  total + (val?.isCashIn ? val?.amount : -val?.amount || 0),
+                0
+              );
             return (
               <SwiperSlide className="max-w-[242px]" key={index}>
                 <CategoryCard
