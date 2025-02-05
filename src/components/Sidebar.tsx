@@ -45,7 +45,7 @@ const Sidebar: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col flex-nowrap items-center px-3">
-          {navLinks.map((link, i) => (
+          {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
