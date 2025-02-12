@@ -1,11 +1,10 @@
-import { ProfileRootState } from "@/store/profileStore";
 import React from "react";
+import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 
 const Profile: React.FC = () => {
-  const { id, username, email, password } = useSelector(
-    (state: ProfileRootState) => state.profileRoot
-  );
+  const profileData = useSelector((state: RootState) => state.profile);
+  const { id, username, email, password } = profileData || {};
   return (
     <div className="p-4">
       <div className="max-w-[500px] p-4 mx-auto border flex flex-col gap-4">

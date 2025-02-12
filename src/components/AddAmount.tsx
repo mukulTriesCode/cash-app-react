@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as cashCountSlice from "../features/cashCountSlice";
 import CalenderComponent from "@/components/Calender";
 import {
   Select,
@@ -9,7 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { RootState } from "@/store/cashStore";
+import { RootState } from "@/store";
+import { cashCountSlice } from "@/features/cashCountSlice";
 
 const AddAmount: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const AddAmount: React.FC = () => {
       "category-input"
     ) as HTMLSelectElement;
     if (entry.amount > 0 && entry.notes.length > 0) {
-      const action = cashCountSlice.addEntry;
+      const action = cashCountSlice.actions.addEntry;
       dispatch(
         action({
           entries: [

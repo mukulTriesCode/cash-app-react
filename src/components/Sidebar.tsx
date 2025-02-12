@@ -45,23 +45,23 @@ const Sidebar: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col flex-nowrap items-center px-3">
-          {navLinks.map((link) => (
+          {navLinks?.map((link) => (
             <Link
-              key={link.path}
-              to={link.path}
+              key={link?.path}
+              to={link?.path}
               className={`${
                 val ? "justify-start gap-4" : ""
               } flex items-center transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
             >
               <div className="text-2xl leading-6 flex-none">
-                {link.icon}
+                {link?.icon}
               </div>
               <span
                 className={`transition-all ${
                   val ? "w-auto opacity-100" : "w-0 opacity-0"
                 } line-clamp-1`}
               >
-                {link.label}
+                {link?.label}
               </span>
             </Link>
           ))}
