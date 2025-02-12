@@ -9,7 +9,7 @@ import {
 } from "chart.js";
 import { Bar, Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/cashStore";
+import { RootState } from "@/store";
 import { months } from "@/lib/utils";
 import { Entry } from "@/features/cashCountSlice";
 

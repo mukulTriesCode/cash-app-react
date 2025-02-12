@@ -5,15 +5,11 @@ import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HeartSVG } from "@/lib/Svgs";
-import { ProfileRootState } from "@/store/profileStore";
 
 const CashBoard: React.FC = () => {
-  const root = useSelector((state: RootState) => state?.root);
-  const profileRoot = useSelector(
-    (state: ProfileRootState) => state.profileRoot
-  );
-  const username = profileRoot?.username;
-  const email = profileRoot?.email;
+  const { root, profile } = useSelector((state: RootState) => state);
+  const username = profile?.username;
+  const email = profile?.email;
   const totalAmount = root?.totalAmount;
   const entries = root?.entries || [];
   const openingBalance = entries.length > 0 ? entries[0].amount : 0;

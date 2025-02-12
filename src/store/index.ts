@@ -11,18 +11,20 @@ import {
   PAUSE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { profileSlice } from "@/features/profileData";
 
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, cashCountSlice);
+const persistedReducers = {
+  root: persistReducer(persistConfig, cashCountSlice),
+  profile: persistReducer(persistConfig, profileSlice.reducer),
+};
 
 export const store = configureStore({
-  reducer: {
-    root: persistedReducer,
-  },
+  reducer: persistedReducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

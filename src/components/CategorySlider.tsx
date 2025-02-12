@@ -3,7 +3,7 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CategoryCard from "./CategoryCard";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/cashStore";
+import { RootState } from "@/store";
 import { NextSVG, PreviousSVG } from "@/lib/Svgs";
 
 const CategorySlider: React.FC = () => {
