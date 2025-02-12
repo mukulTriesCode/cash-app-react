@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { RootState } from "@/store/cashStore";
+import { RootState } from "@/store";
 import { cashCountSlice } from "@/features/cashCountSlice";
 
 const AddAmount: React.FC = () => {
