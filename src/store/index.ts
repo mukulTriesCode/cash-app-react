@@ -11,7 +11,8 @@ import {
   PAUSE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { profileSlice } from "@/features/profileData";
+import profileSlice from "@/features/profileSlice";
+import authSlice from "@/features/authSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,7 +21,8 @@ const persistConfig = {
 
 const persistedReducers = {
   root: persistReducer(persistConfig, cashCountSlice),
-  profile: persistReducer(persistConfig, profileSlice.reducer),
+  profile: persistReducer(persistConfig, profileSlice),
+  auth: persistReducer(persistConfig, authSlice),
 };
 
 export const store = configureStore({
