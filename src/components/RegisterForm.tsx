@@ -1,4 +1,4 @@
-import { profileSlice } from "@/features/profileData";
+import { profileSlice } from "@/features/profileSlice";
 import React, { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 

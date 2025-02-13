@@ -3,7 +3,7 @@ import NotificationModal from "./NotificationModal";
 import { ArrowUpIcon, BellSVG, ProfileSVG, SearchSVG } from "@/lib/Svgs";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { profileSlice } from "@/features/profileData";
+import { profileSlice } from "@/features/profileSlice";
 
 const Navbar: React.FC = () => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
