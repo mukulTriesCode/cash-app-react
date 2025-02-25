@@ -10,4 +10,4 @@ Todo
 -Login, logout, signup
 -Authenication
 -Add CRUD
--Backend configuration (PostgreSQL & NodeJS)
+-Backend configuration (MongoDB & NodeJS)
