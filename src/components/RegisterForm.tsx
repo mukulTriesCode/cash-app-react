@@ -1,11 +1,13 @@
-import { profileSlice } from "@/features/profileSlice";
 import React, { FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "@/features/profileSlice"; // Adjust the import path
+import { AppDispatch, RootState } from "@/store"; // Add AppDispatch import
 
 const RegisterForm: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading, error } = useSelector((state: RootState) => state.profile);
+
   const [formData, setFormData] = useState({
-    id: "",
     username: "",
     email: "",
     password: "",
@@ -18,22 +20,27 @@ const RegisterForm: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("formData :>> ", formData);
-    const action = profileSlice.actions.addProfile;
-    const updatedFormData = {
-      ...formData,
-      id: Math.random().toString(36).substr(2, 9), // Using a random string for id
-    };
-    dispatch(action(updatedFormData));
+    try {
+      await dispatch(registerUser(formData)).unwrap();
+      // Optionally reset form after successful registration
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
+      console.log("Registration successful");
+      // You might want to redirect here
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className="w-fit">
       <form
         onSubmit={handleSubmit}
-        action="GET"
         className="max-w-[400px] flex gap-4 flex-col w-full border border-white/15 py-5 m-4 px-4 rounded-md bg-[#131313]"
       >
         <h5 className="text-center text-2xl">Sign Up</h5>
@@ -41,29 +48,37 @@ const RegisterForm: React.FC = () => {
           className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
           type="text"
           name="username"
+          value={formData.username}
           onChange={handleInputChange}
           placeholder="Username"
+          disabled={loading}
         />
         <input
           className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
           type="email"
           name="email"
+          value={formData.email}
           onChange={handleInputChange}
           placeholder="Email"
+          disabled={loading}
         />
         <input
           className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
           type="password"
           name="password"
+          value={formData.password}
           onChange={handleInputChange}
           placeholder="Password"
+          disabled={loading}
         />
         <button
-          className="w-full text-center px-4 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg cursor-pointer"
+          className="w-full text-center px-4 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
+          disabled={loading}
         >
-          Sign Up
+          {loading ? "Signing Up..." : "Sign Up"}
         </button>
+        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </form>
     </div>
   );
