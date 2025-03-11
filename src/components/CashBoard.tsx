@@ -5,6 +5,7 @@ import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HeartSVG } from "@/lib/Svgs";
+import useMobile from "@/hooks/useMobile";
 
 const CashBoard: React.FC = () => {
   const { root, profile } = useSelector((state: RootState) => state);
@@ -13,17 +14,22 @@ const CashBoard: React.FC = () => {
   const totalAmount = root?.totalAmount;
   const entries = root?.entries || [];
   const openingBalance = entries.length > 0 ? entries[0].amount : 0;
+  const isMobile = useMobile(834);
 
   return (
-    <div className="col-span-2 flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
-      <div className="max-w-[438px] w-full aspect-[219/200]">
-        <img
-          className="-translate-x-8 translate-y-6 scale-110"
-          src={CashDash}
-          alt="Dashboard Image"
-        />
-      </div>
-      <div className="w-full flex flex-col max-w-[450px]">
+    <div className="flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
+      {!isMobile && (
+        <div className="hidden tab:block max-w-[278px] lg:max-w-[350px] xl:max-w-[438px] w-full aspect-[219/200]">
+          <img
+            className="lg:-translate-x-8 lg:translate-y-6 lg:scale-110"
+            src={CashDash}
+            alt="Dashboard Image"
+            loading="lazy"
+            sizes="(max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
+      )}
+      <div className="w-full sm:flex-none flex flex-col tab:max-w-[450px]">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold">Records</h2>
           <div className="flex items-center">
@@ -35,8 +41,7 @@ const CashBoard: React.FC = () => {
             className="w-14 h-14 rounded-full object-cover"
             src={Profile}
             alt="Profile Image"
-            // @ts-expect-error invalid prop
-            fetchpriority="high"
+            fetchPriority="high"
             rel="preload"
           />
           <span className="ml-4 text-lg font-medium">
@@ -56,7 +61,7 @@ const CashBoard: React.FC = () => {
             <div className="text-xl font-bold">Rs. {totalAmount || "--"}</div>
           </div>
         </div>
-        <div className="flex mt-auto gap-4 font-semibold text-center">
+        <div className="flex mt-7 md:mt-auto gap-4 font-semibold text-center">
           <Link
             to={"/add-entry"}
             className="w-full transition-all bg-white/70 text-black hover:bg-white py-2 px-4 rounded"

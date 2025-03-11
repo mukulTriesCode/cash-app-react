@@ -108,7 +108,7 @@ const CashChart: React.FC = () => {
   ));
 
   return (
-    <div className="bg-gradient-to-bl from-gradient-red/40 to-gradient-blue/40 p-[2px] rounded-xl shadow-lg">
+    <div className="bg-gradient-to-bl h-full from-gradient-red/40 to-gradient-blue/40 p-[2px] rounded-xl shadow-lg">
       <div className="p-4 w-full h-full rounded-xl bg-black flex flex-col justify-between">
         <div className="inline-flex items-center justify-center gap-2">
           {chartTypeOptions}

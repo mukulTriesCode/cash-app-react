@@ -39,7 +39,7 @@ const TransactionHistory: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 h-full">
       <div className="flex justify-between pe-3">
         <h2 className="text-2xl font-bold leading-[2.375rem]">
           Transaction History
