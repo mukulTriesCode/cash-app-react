@@ -16,9 +16,9 @@ const CashBoard: React.FC = () => {
 
   return (
     <div className="flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
-      <div className="hidden tab:block max-w-[278px] md:max-w-[350px] xl:max-w-[438px] w-full aspect-[219/200]">
+      <div className="hidden tab:block max-w-[278px] lg:max-w-[350px] xl:max-w-[438px] w-full aspect-[219/200]">
         <img
-          className="md:-translate-x-8 md:translate-y-6 md:scale-110"
+          className="lg:-translate-x-8 lg:translate-y-6 lg:scale-110"
           src={CashDash}
           alt="Dashboard Image"
         />
