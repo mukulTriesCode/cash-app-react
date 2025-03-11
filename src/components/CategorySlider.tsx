@@ -42,7 +42,7 @@ const CategorySlider: React.FC = () => {
   }, []);
 
   return (
-    <div className="col-span-2">
+    <>
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Categories</h2>
         <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ const CategorySlider: React.FC = () => {
           No Categories found
         </div>
       )}
-    </div>
+    </>
   );
 };
 
