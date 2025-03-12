@@ -26,6 +26,9 @@ const Layout: React.FC = () => {
                   decoding="async"
                   rel="preload"
                   sizes="(max-width: 1200px) 50vw, 33vw"
+                  fetchPriority="high"
+                  width="1920"
+                  height="1080"
                 />
               </div>
               <Navbar />
