@@ -1,5 +1,5 @@
 import React from "react";
-import CashDash from "../assets/CashDash-min (1).webp";
+// import CashDash from "../assets/CashDash-min (1).webp";
 import Profile from "../assets/profile.png";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
@@ -20,13 +20,13 @@ const CashBoard: React.FC = () => {
     <div className="flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
       {!isMobile && (
         <div className="hidden tab:block max-w-[278px] lg:max-w-[350px] xl:max-w-[438px] w-full aspect-[219/200]">
-          <img
+          {/* <img
             className="lg:-translate-x-8 lg:translate-y-6 lg:scale-110"
             src={CashDash}
             alt="Dashboard Image"
             loading="lazy"
             sizes="(max-width: 1200px) 50vw, 33vw"
-          />
+          /> */}
         </div>
       )}
       <div className="w-full sm:flex-none flex flex-col tab:max-w-[450px]">
