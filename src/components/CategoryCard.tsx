@@ -19,7 +19,7 @@ const CategoryCard: React.FC<{
         <div className="mt-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold capitalize">
-              {category?.name}
+              {category?.name?.length >= 17 ? category?.name?.slice(0, 17) + "..." : category?.name}
               {emojis[length > emojis.length ? length - emojis.length : index]}
             </h3>
           </div>

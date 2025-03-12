@@ -1,17 +1,17 @@
 /* typography.css */
 
 /* Base styles for all headings */
-h1,
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  @apply font-bold text-white leading-tight;
-}
+  @apply font-bold text-white leading-tight; 
+ } */
 
 /* Individual heading styles */
-h1 {
+/* h1 {
   @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl mb-6;
 }
 
@@ -33,31 +33,31 @@ h5 {
 
 h6 {
   @apply text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-2;
-}
+} */
 
 /* Paragraph styles */
-p {
+/* p {
   @apply text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl leading-relaxed mb-4 text-gray-300;
-}
+} */
 
 /* You can also add utility classes for different paragraph variants */
-.p-large {
+/* .p-large {
   @apply text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl;
-}
+} */
 
-.p-small {
+/* .p-small {
   @apply text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-400;
-}
+} */
 
 /* For subtle text like captions or metadata */
-.p-subtle {
+/* .p-subtle {
   @apply text-xs md:text-sm lg:text-base xl:text-lg text-gray-500 italic;
-}
+} */
 
 /* For important text that needs emphasis */
-.p-emphasis {
+/* .p-emphasis {
   @apply font-medium text-white;
-}
+} */
 
 .ping {
   --uib-size: 50px;
