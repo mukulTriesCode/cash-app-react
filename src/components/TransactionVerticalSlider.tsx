@@ -52,7 +52,7 @@ const TransactionVerticalSlider: React.FC<{ filteredEntries: Entry[] }> = ({
           ))}
         </Swiper>
       ) : (
-        <div className="px-4 w-full max-h-[372px] h-full rounded-xl bg-black grid place-items-center text-xl">
+        <div className="px-4 w-full min-h-[250px] max-h-[372px] h-full rounded-xl bg-black grid place-items-center text-xl">
           No Transactions found
         </div>
       )}
