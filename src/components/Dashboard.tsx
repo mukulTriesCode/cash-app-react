@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
-import CashBoard from "./CashBoard";
+// import CashBoard from "./CashBoard";
+const CashBoard = React.lazy(() => import("./CashBoard"));
 const CategorySlider = React.lazy(() => import("./CategorySlider"));
 const CashChart = React.lazy(() => import("./CashChart"));
 const TransactionHistory = React.lazy(() => import("./TransactionHistory"));
@@ -7,7 +8,9 @@ const Dashboard: React.FC = () => {
   return (
     <div className="grid grid-cols-7 xl:grid-cols-3 gap-8 p-7">
       <div className="col-span-7 xl:col-span-2">
-        <CashBoard />
+        <Suspense fallback={<div></div>}>
+          <CashBoard />
+        </Suspense>
       </div>
       <div className="col-span-7 sm:col-span-4 xl:col-span-1">
         <Suspense fallback={<div></div>}>

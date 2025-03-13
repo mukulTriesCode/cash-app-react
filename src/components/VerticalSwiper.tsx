@@ -18,7 +18,7 @@ const VerticalSwiper: React.FC<{ entries: Entry[] }> = ({ entries }) => {
             {entries.slice(0, 20).map((val, i, arr) => (
                 <SwiperSlide
                     key={val?.id}
-                    className={`[&&]:flex items-center h-[auto] gap-2 py-2 px-1 border-b border-white/15 ${i !== 0 && i === arr.length - 1 ? "border-none" : ""
+                    className={`[&&]:flex items-center h-[auto] gap-2 py-2 px-4 border-b border-white/15 ${i !== 0 && i === arr.length - 1 ? "border-none" : ""
                         }`}
                 >
                     <div className="w-[40px] flex-none h-[40px] rounded-full bg-white/15 flex items-center justify-center">
