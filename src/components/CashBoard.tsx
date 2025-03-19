@@ -1,5 +1,5 @@
 import React from "react";
-import CashDash from "../assets/CashDash-min (1).webp";
+import CashDash from "../assets/CashDash-min.webp";
 import Profile from "../assets/profile.png";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
