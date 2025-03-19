@@ -7,7 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import background from "../assets/Dashboard-min (1).webp";
+import background from "../assets/Dashboard-min.webp";
 
 const Layout: React.FC = () => {
   return (
