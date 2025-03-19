@@ -16,7 +16,7 @@ const Layout: React.FC = () => {
         <PersistGate loading={null} persistor={persistor}>
           <ValProvider>
             <Sidebar />
-            <div className="ms-[88px] relative">
+            <div className="xs:ms-[88px] relative">
               <div className="absolute z-[-1] top-0 left-0 w-full min-h-screen h-full opacity-10">
                 <img
                   className="w-full h-full object-cover"
