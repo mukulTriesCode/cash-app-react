@@ -32,7 +32,7 @@ const Layout: React.FC = () => {
                 />
               </div>
               <Navbar />
-              <div className="pt-[95px]">
+              <div className="pt-[81px] xs:pt-[95px]">
                 <Outlet />
               </div>
             </div>
