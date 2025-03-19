@@ -21,8 +21,8 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <div className="fixed z-50 w-[calc(100%-88px)] px-7 border-b border-[#262626] py-6 bg-[#131313]">
-        <div className="flex items-center justify-between">
+      <div className="fixed z-50 ps-[88px] w-full xs:w-[calc(100%-88px)] px-7 border-b border-[#262626] py-6 bg-[#131313]">
+        <div className="flex items-center justify-between gap-5 xs:gap-0">
           <div className="w-full max-w-[300px] relative">
             <input
               type="text"
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
               <SearchSVG />
             </span>
           </div>
-          <div className="flex items-center gap-9">
+          <div className="flex items-center gap-5 xs:gap-9">
             <div
               className="relative"
               onClick={() => {
