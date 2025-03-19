@@ -22,13 +22,13 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex relative">
       <div
         className={`bg-[#131313] fixed z-[1000] border-r-[0.5px] border-white/10 h-screen transition-all duration-300 ${
-          val ? "w-72" : "w-[88px] overflow-hidden"
+          val ? "w-full xs:w-72" : "w-0 xs:w-[88px] xs:overflow-hidden"
         }`}
       >
-        <div className={`flex-1 p-4 py-6 ml-0 z-10`}>
+        <div className={`absolute flex-1 p-4 py-6 ml-0 z-10`}>
           <div className="ml-auto">
             <button
               id="breadcrumb"
@@ -44,7 +44,11 @@ const Sidebar: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col flex-nowrap items-center px-3">
+        <div
+          className={`flex flex-col flex-nowrap items-center px-3 mt-24 ${
+            val ? "opacity-100" : "opacity-0 xs:opacity-100"
+          }`}
+        >
           {navLinks?.map((link) => (
             <Link
               key={link?.path}
@@ -53,9 +57,7 @@ const Sidebar: React.FC = () => {
                 val ? "justify-start gap-4" : ""
               } flex items-center transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
             >
-              <div className="text-2xl leading-6 flex-none">
-                {link?.icon}
-              </div>
+              <div className="text-2xl leading-6 flex-none">{link?.icon}</div>
               <span
                 className={`transition-all ${
                   val ? "w-auto opacity-100" : "w-0 opacity-0"
