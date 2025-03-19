@@ -4,10 +4,12 @@ import { ArrowUpIcon, BellSVG, ProfileSVG, SearchSVG } from "@/lib/Svgs";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { profileSlice } from "@/features/profileSlice";
+import useMobile from "@/hooks/useMobile";
 
 const Navbar: React.FC = () => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
+  const isMobile = useMobile(640);
 
   const dispatch = useDispatch();
   const action = profileSlice.actions.logoutProfile;
@@ -21,18 +23,20 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <div className="fixed z-50 ps-[88px] w-full xs:w-[calc(100%-88px)] px-7 border-b border-[#262626] py-6 bg-[#131313]">
-        <div className="flex items-center justify-between gap-5 xs:gap-0">
-          <div className="w-full max-w-[300px] relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full p-4 py-3 pr-10 rounded-lg bg-[#a2a3a446] text-white/75 outline-none focus:ring-2 focus:ring-white/50"
-            />
-            <span className="cursor-pointer">
-              <SearchSVG />
-            </span>
-          </div>
+      <div className="fixed z-50 ps-[88px] pe-4 w-full xs:w-[calc(100%-88px)] xs:px-7 border-b border-[#262626] py-4 xs:py-6 bg-[#131313]">
+        <div className="flex items-center justify-end h-12 xs:h-auto xs:justify-between gap-5 xs:gap-0">
+          {!isMobile && (
+            <div className="w-full max-w-[300px] relative">
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full p-4 py-3 pr-10 rounded-lg bg-[#a2a3a446] text-white/75 outline-none focus:ring-2 focus:ring-white/50"
+              />
+              <span className="cursor-pointer">
+                <SearchSVG />
+              </span>
+            </div>
+          )}
           <div className="flex items-center gap-5 xs:gap-9">
             <div
               className="relative"
