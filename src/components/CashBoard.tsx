@@ -19,7 +19,7 @@ const CashBoard: React.FC = () => {
   return (
     <div className="flex justify-between p-4 w-full h-full bg-gradient-to-bl rounded-xl from-gradient-red to-gradient-blue">
       {!isMobile && (
-        <div className="hidden tab:block max-w-[278px] lg:max-w-[350px] xl:max-w-[438px] w-full aspect-[219/200]">
+        <div className="max-w-[278px] lg:max-w-[350px] 2xl:max-w-[380px] w-full aspect-[219/200]">
           <img
             className="lg:-translate-x-8 lg:translate-y-6 lg:scale-110"
             src={CashDash}
@@ -29,7 +29,7 @@ const CashBoard: React.FC = () => {
           />
         </div>
       )}
-      <div className="w-full sm:flex-none flex flex-col tab:max-w-[450px]">
+      <div className="w-full flex-none xl:flex-auto flex flex-col tab:max-w-[450px]">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold">Records</h2>
           <div className="flex items-center">
@@ -59,7 +59,7 @@ const CashBoard: React.FC = () => {
             <div className="text-xl font-bold">Rs. {totalAmount || "--"}</div>
           </div>
         </div>
-        <div className="flex mt-7 md:mt-auto gap-4 font-semibold text-center">
+        <div className="flex flex-col xs:flex-row mt-7 md:mt-auto gap-4 font-semibold text-center">
           <Link
             to={"/add-entry"}
             className="w-full transition-all bg-white/70 text-black hover:bg-white py-2 px-4 rounded"
