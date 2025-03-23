@@ -31,7 +31,7 @@ const CashBoard: React.FC = () => {
       )}
       <div className="w-full flex-none xl:flex-auto flex flex-col tab:max-w-[450px]">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl xs:text-3xl font-bold">Records</h2>
+          <h2 className="text-3xl font-bold">Records</h2>
           <div className="flex items-center">
             <HeartSVG />
           </div>
@@ -41,11 +41,8 @@ const CashBoard: React.FC = () => {
             className="w-14 h-14 rounded-full object-cover"
             src={Profile}
             alt="Profile Image"
-            rel="preload"
-            loading="eager"
             width="56"
             height="56"
-            fetchPriority="high"
           />
           <span className="ml-4 text-lg font-medium">
             <div className="text-sm">{username || "Mukul Sharma"}</div>
