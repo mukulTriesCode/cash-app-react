@@ -41,6 +41,7 @@ const CashBoard: React.FC = () => {
             className="w-14 h-14 rounded-full object-cover"
             src={Profile}
             alt="Profile Image"
+            rel="preload"
             loading="eager"
             width="56"
             height="56"
