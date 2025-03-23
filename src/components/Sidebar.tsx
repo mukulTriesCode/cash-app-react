@@ -16,8 +16,8 @@ const Sidebar: React.FC = () => {
 
   const navLinks = [
     { path: "/", label: "Home", icon: <HomeIcon /> },
-    { path: "/category", label: "Category", icon: <CategoryIcon /> },
     { path: "/add-entry", label: "Add Entry", icon: <AddEntryIcon /> },
+    { path: "/category", label: "Category", icon: <CategoryIcon /> },
     { path: "/profile", label: "Profile", icon: <ProfileIcon /> },
     { path: "/sign-up", label: "Sign Up", icon: <Login /> },
     { path: "/login", label: "Login", icon: <Login /> },
@@ -48,7 +48,7 @@ const Sidebar: React.FC = () => {
         </div>
         <div
           className={`flex flex-col flex-nowrap items-center px-3 mt-24 ${
-            val ? "opacity-100" : "opacity-0 xs:opacity-100"
+            val ? "opacity-100" : "opacity-0 hidden xs:block xs:opacity-100"
           }`}
         >
           {navLinks?.map((link) => (
