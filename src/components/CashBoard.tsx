@@ -43,6 +43,9 @@ const CashBoard: React.FC = () => {
             alt="Profile Image"
             width="56"
             height="56"
+            srcSet={`${Profile} 56w, ${Profile} 112w`}
+            sizes="56px"
+            loading="lazy"
           />
           <span className="ml-4 text-lg font-medium">
             <div className="text-sm">{username || "Mukul Sharma"}</div>
