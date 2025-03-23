@@ -6,7 +6,7 @@ const CashChart = React.lazy(() => import("./CashChart"));
 const TransactionHistory = React.lazy(() => import("./TransactionHistory"));
 const Dashboard: React.FC = () => {
   return (
-    <div className="grid grid-cols-7 xl:grid-cols-3 gap-8 p-7">
+    <div className="grid grid-cols-7 xl:grid-cols-3 gap-4 xs:gap-8 p-4 xs:p-7">
       <div className="col-span-7 xl:col-span-2">
         <Suspense fallback={<div></div>}>
           <CashBoard />
