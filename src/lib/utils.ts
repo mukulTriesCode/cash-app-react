@@ -1,3 +1,4 @@
+import axios from "axios";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -51,3 +52,12 @@ export const months = [
   { label: "NOV", val: 'November' },
   { label: "DEC", val: 'December' },
 ];
+
+export const fetchData = async () => {
+  try {
+    const response = await axios.get(import.meta.env.VITE_API_URL || "");
+    console.log("data :>> ", response.data);
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+  }
+};
