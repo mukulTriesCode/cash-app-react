@@ -60,8 +60,6 @@ const Navbar: React.FC = () => {
                   className="rounded-full object-cover"
                   src={Profile}
                   alt="Profile Image"
-                  width="40"
-                  height="40"
                 />
               ) : (
                 <ProfileSVG />
