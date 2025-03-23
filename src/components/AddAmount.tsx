@@ -145,7 +145,7 @@ const AddAmount: React.FC = () => {
           </SelectContent>
         </Select>
       </div>
-      <div className="flex gap-4">
+      <div className="flex lg:flex-col xl:flex-row gap-4">
         <button
           className="w-full text-center px-4 py-3 bg-green-600 hover:bg-green-700 transition rounded-lg cursor-pointer"
           onClick={() => handleAmountChange(false)}

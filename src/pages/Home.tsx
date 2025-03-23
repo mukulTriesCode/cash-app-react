@@ -1,21 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Dashboard from "../components/Dashboard";
-import axios from "axios";
 // const ChatBot = React.lazy(() => import("react-chatbotify"));
 // import { Params } from "react-chatbotify";
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(import.meta.env.VITE_API_URL || "");
-        console.log("data :>> ", response.data);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-    fetchData();
-  }, []);
   // const helpOptions = [
   //   "Quickstart",
   //   "API Docs",

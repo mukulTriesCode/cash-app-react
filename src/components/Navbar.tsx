@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
             >
               {Profile ? (
                 <img
-                  className=" rounded-full object-cover"
+                  className="rounded-full object-cover"
                   src={Profile}
                   alt="Profile Image"
                 />

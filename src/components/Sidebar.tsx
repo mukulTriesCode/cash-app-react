@@ -16,8 +16,8 @@ const Sidebar: React.FC = () => {
 
   const navLinks = [
     { path: "/", label: "Home", icon: <HomeIcon /> },
-    { path: "/category", label: "Category", icon: <CategoryIcon /> },
     { path: "/add-entry", label: "Add Entry", icon: <AddEntryIcon /> },
+    { path: "/category", label: "Category", icon: <CategoryIcon /> },
     { path: "/profile", label: "Profile", icon: <ProfileIcon /> },
     { path: "/sign-up", label: "Sign Up", icon: <Login /> },
     { path: "/login", label: "Login", icon: <Login /> },
@@ -48,7 +48,7 @@ const Sidebar: React.FC = () => {
         </div>
         <div
           className={`flex flex-col flex-nowrap items-center px-3 mt-24 ${
-            val ? "opacity-100" : "opacity-0 xs:opacity-100"
+            val ? "opacity-100" : "opacity-0 hidden xs:block xs:opacity-100"
           }`}
         >
           {navLinks?.map((link) => (
@@ -58,6 +58,9 @@ const Sidebar: React.FC = () => {
               className={`${
                 val ? "justify-start gap-4" : ""
               } flex items-center transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
+              onClick={() => {
+                isMobile && toggleVal && toggleVal();
+              }}
             >
               <div className="text-2xl leading-6 flex-none">{link?.icon}</div>
               <span
@@ -70,7 +73,7 @@ const Sidebar: React.FC = () => {
             </Link>
           ))}
           {isMobile && (
-            <div className="w-full max-w-[332px] self-start p-4">
+            <div className="w-full self-start p-4">
               <div className="relative">
                 <input
                   type="text"
