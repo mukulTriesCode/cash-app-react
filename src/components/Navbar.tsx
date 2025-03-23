@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { profileSlice } from "@/features/profileSlice";
 import useMobile from "@/hooks/useMobile";
+import Profile from "../assets/profile.webp";
 
 const Navbar: React.FC = () => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -54,7 +55,15 @@ const Navbar: React.FC = () => {
               onClick={() => handleProfileDropdown()}
               className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center cursor-pointer relative"
             >
-              <ProfileSVG />
+              {Profile ? (
+                <img
+                  className=" rounded-full object-cover"
+                  src={Profile}
+                  alt="Profile Image"
+                />
+              ) : (
+                <ProfileSVG />
+              )}
               <div
                 className={`absolute top-full right-0 ${
                   isProfileClicked ? "block" : "hidden"
