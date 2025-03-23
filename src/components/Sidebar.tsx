@@ -58,6 +58,9 @@ const Sidebar: React.FC = () => {
               className={`${
                 val ? "justify-start gap-4" : ""
               } flex items-center transition-all py-4 px-5 w-full rounded-xl bg-transparent hover:bg-gradient-to-bl to-gradient-red/50 from-gradient-blue/50`}
+              onClick={() => {
+                isMobile && toggleVal && toggleVal();
+              }}
             >
               <div className="text-2xl leading-6 flex-none">{link?.icon}</div>
               <span
@@ -70,7 +73,7 @@ const Sidebar: React.FC = () => {
             </Link>
           ))}
           {isMobile && (
-            <div className="w-full max-w-[332px] self-start p-4">
+            <div className="w-full self-start p-4">
               <div className="relative">
                 <input
                   type="text"
