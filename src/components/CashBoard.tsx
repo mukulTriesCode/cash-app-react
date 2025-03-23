@@ -41,6 +41,10 @@ const CashBoard: React.FC = () => {
             className="w-14 h-14 rounded-full object-cover"
             src={Profile}
             alt="Profile Image"
+            loading="eager"
+            width="56"
+            height="56"
+            fetchPriority="high"
           />
           <span className="ml-4 text-lg font-medium">
             <div className="text-sm">{username || "Mukul Sharma"}</div>
