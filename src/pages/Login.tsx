@@ -1,23 +1,45 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("formData :>> ", formData);
-    // Assuming there's a function to handle the login logic
-    // handleLogin(formData.email, formData.password);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok && data.token) {
+        localStorage.setItem("token", data.token);
+        navigate("/"); // Redirect to home page after successful login
+      } else {
+        setError(data.message || "Invalid email or password");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,10 +50,14 @@ const Login: React.FC = () => {
           className="max-w-[400px] flex gap-4 flex-col w-full border border-white/15 py-5 m-4 px-4 rounded-md bg-[#131313]"
         >
           <h5 className="text-center text-2xl">Login</h5>
+
+          {error && <p className="text-red-500 text-center">{error}</p>}
+
           <input
             className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
             type="email"
             name="email"
+            value={formData.email}
             onChange={handleInputChange}
             placeholder="Email"
             required
@@ -40,15 +66,18 @@ const Login: React.FC = () => {
             className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
             type="password"
             name="password"
+            value={formData.password}
             onChange={handleInputChange}
             placeholder="Password"
             required
           />
+
           <button
             className="w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-lg cursor-pointer"
             type="submit"
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>
