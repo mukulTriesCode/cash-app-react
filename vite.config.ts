@@ -9,4 +9,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://cash-app-backend.vercel.app",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
 });
