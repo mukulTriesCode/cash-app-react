@@ -8,7 +8,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const BASE_URL = import.meta.env.VITE_IS_PRODUCTION
-    ? import.meta.env.VITE_API_URL
+    ? import.meta.env.VITE_API_URL + "/api"
     : "/api";
 
   console.log("BASE_URL", BASE_URL);
