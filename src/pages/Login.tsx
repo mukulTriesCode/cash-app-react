@@ -11,6 +11,8 @@ const Login: React.FC = () => {
     ? import.meta.env.VITE_API_URL
     : "/api";
 
+  console.log("BASE_URL", BASE_URL);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
