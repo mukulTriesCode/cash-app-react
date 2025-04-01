@@ -7,6 +7,10 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const BASE_URL = import.meta.env.IS_PRODUCTION
+    ? import.meta.env.VITE_API_URL
+    : "/api";
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -17,7 +21,7 @@ const Login: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch(`/api/login`, {
+      const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
