@@ -31,9 +31,15 @@ const Login: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch(`${BASE_URL}/login`, {
+      const response = await fetch(`api/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type"
+        },
+        credentials: "include",
         body: JSON.stringify(formData),
       });
 

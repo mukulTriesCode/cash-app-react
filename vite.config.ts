@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://cash-app-backend.vercel.app",
+        target: "https://cash-app-backend.onrender.com",
         changeOrigin: true,
         secure: true,
       },
