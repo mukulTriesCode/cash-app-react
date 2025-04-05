@@ -1,8 +1,10 @@
 import React, { FormEvent, useState } from "react";
+// @ts-ignore
 import { useDispatch, useSelector } from "react-redux";
-// import { registerUser } from "@/features/profileSlice"; // Adjust the import path
+// @ts-ignore
 import { AppDispatch, RootState } from "@/store"; // Add AppDispatch import
 import { Link } from "react-router-dom";
+// import { registerUser } from "@/features/profileSlice"; // Adjust the import path
 
 const RegisterForm: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>();
