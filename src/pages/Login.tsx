@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -7,23 +7,13 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const BASE_URL = import.meta.env.VITE_IS_PRODUCTION
-    ? import.meta.env.VITE_API_URL + "/api"
-    : "/api";
-
-  console.log("BASE_URL", BASE_URL);
+  // const BASE_URL = import.meta.env.VITE_IS_PRODUCTION
+  //   ? import.meta.env.VITE_API_URL + "/api"
+  //   : "/api";
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  useEffect(() => {
-    const url = import.meta.env.VITE_API_URL;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => console.log("API response:", data))
-      .catch((error) => console.error("Error fetching:", error));
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,11 +25,7 @@ const Login: React.FC = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "POST, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type"
         },
-        credentials: "include",
         body: JSON.stringify(formData),
       });
 
@@ -60,44 +46,52 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-95px)] grid place-items-center">
-      <div className="w-fit">
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-[400px] flex gap-4 flex-col w-full border border-white/15 py-5 m-4 px-4 rounded-md bg-[#131313]"
+    <div className="w-full max-w-[500px]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex gap-4 flex-col"
+      >
+        <h1 className="text-4xl">Login</h1>
+        {/* <h5 className="text-2xl">Login</h5> */}
+
+        {error && <p className="text-red-500 text-center">{error}</p>}
+
+        <input
+          className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Email"
+          required
+        />
+        <input
+          className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          placeholder="Password"
+          required
+        />
+
+        <button
+          className="w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-lg cursor-pointer"
+          type="submit"
+          disabled={loading}
         >
-          <h5 className="text-center text-2xl">Login</h5>
-
-          {error && <p className="text-red-500 text-center">{error}</p>}
-
-          <input
-            className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Email"
-            required
-          />
-          <input
-            className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            placeholder="Password"
-            required
-          />
-
-          <button
-            className="w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-lg cursor-pointer"
-            type="submit"
-            disabled={loading}
+          {loading ? "Logging in..." : "Login"}
+        </button>
+        <div className="flex items-center justify-center gap-2 mt-4">
+          <p className="text-white/50">Don't have an account?</p>
+          <Link
+            to="/sign-up"
+            className="text-blue-500 hover:text-blue-400 transition"
           >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
-      </div>
+            Sign up
+          </Link>
+        </div>
+      </form>
     </div>
   );
 };
