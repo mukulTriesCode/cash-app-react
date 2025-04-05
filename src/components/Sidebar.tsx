@@ -6,7 +6,6 @@ import { GoHomeFill as HomeIcon } from "react-icons/go";
 import { BiSolidCategoryAlt as CategoryIcon } from "react-icons/bi";
 import { IoMdAddCircle as AddEntryIcon } from "react-icons/io";
 import { CgProfile as ProfileIcon } from "react-icons/cg";
-import { LuLogIn as Login } from "react-icons/lu";
 import useMobile from "@/hooks/useMobile";
 
 const Sidebar: React.FC = () => {
@@ -19,8 +18,6 @@ const Sidebar: React.FC = () => {
     { path: "/add-entry", label: "Add Entry", icon: <AddEntryIcon /> },
     { path: "/category", label: "Category", icon: <CategoryIcon /> },
     { path: "/profile", label: "Profile", icon: <ProfileIcon /> },
-    { path: "/sign-up", label: "Sign Up", icon: <Login /> },
-    { path: "/login", label: "Login", icon: <Login /> },
   ];
 
   return (
