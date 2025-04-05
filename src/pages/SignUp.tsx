@@ -3,7 +3,7 @@ import React from "react";
 
 const SignUp: React.FC = () => {
   return (
-    <div className="h-[calc(100vh-95px)] grid place-items-center">
+    <div className="w-full max-w-[500px]">
       <RegisterForm />
     </div>
   );
