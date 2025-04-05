@@ -16,6 +16,7 @@ const Navbar: React.FC = () => {
   const action = profileSlice.actions.logoutProfile;
   const logOut = () => {
     dispatch(action());
+    localStorage.removeItem("token");
   };
 
   const handleProfileDropdown = () => {
