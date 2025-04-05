@@ -10,20 +10,35 @@ const AddEntry = lazy(() => import("./pages/AddEntry"));
 const Profile = lazy(() => import("./pages/Profile"));
 
 export const routes = [
-  { path: "/", element: <LazyRoute component={Home} requiresAuth={true} /> },
+  {
+    path: "/",
+    element: <LazyRoute component={Home} requiresAuth={true} />,
+    protected: true,
+  },
   {
     path: "/category",
     element: <LazyRoute component={Category} requiresAuth={true} />,
+    protected: true,
   },
   {
     path: "/add-entry",
     element: <LazyRoute component={AddEntry} requiresAuth={true} />,
+    protected: true,
   },
   {
     path: "/profile",
     element: <LazyRoute component={Profile} requiresAuth={true} />,
+    protected: true,
   },
-  { path: "/login", element: <LazyRoute component={Login} /> },
-  { path: "/sign-up", element: <LazyRoute component={SignUp} /> },
-  { path: "*", element: <h1>404</h1> },
+  {
+    path: "/login",
+    element: <LazyRoute component={Login} />,
+    protected: false,
+  },
+  {
+    path: "/sign-up",
+    element: <LazyRoute component={SignUp} />,
+    protected: false,
+  },
+  { path: "*", element: <h1>404</h1>, protected: false },
 ];
