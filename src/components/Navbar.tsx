@@ -6,17 +6,20 @@ import { useDispatch } from "react-redux";
 import { profileSlice } from "@/features/profileSlice";
 import useMobile from "@/hooks/useMobile";
 import Profile from "../assets/profile.webp";
+import { useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const isMobile = useMobile(640);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const action = profileSlice.actions.logoutProfile;
   const logOut = () => {
     dispatch(action());
     localStorage.removeItem("token");
+    navigate("/login");
   };
 
   const handleProfileDropdown = () => {
