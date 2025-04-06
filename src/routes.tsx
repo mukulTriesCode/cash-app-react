@@ -8,6 +8,7 @@ const SignUp = lazy(() => import("./pages/SignUp"));
 const Category = lazy(() => import("./pages/Category"));
 const AddEntry = lazy(() => import("./pages/AddEntry"));
 const Profile = lazy(() => import("./pages/Profile"));
+const NotFound = lazy(() => import("./pages/404"));
 
 export const routes = [
   {
@@ -40,5 +41,9 @@ export const routes = [
     element: <LazyRoute component={SignUp} />,
     protected: false,
   },
-  { path: "*", element: <h1>404</h1>, protected: false },
+  {
+    path: "*",
+    element: <LazyRoute component={NotFound} />,
+    protected: false,
+  },
 ];
