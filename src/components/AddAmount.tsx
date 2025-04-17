@@ -64,6 +64,7 @@ const AddAmount: React.FC = () => {
         }
 
         const data = await response.json();
+        console.info(data)
 
         // Dispatch to Redux store
         dispatch(
