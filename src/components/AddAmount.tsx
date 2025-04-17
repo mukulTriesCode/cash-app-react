@@ -40,28 +40,58 @@ const AddAmount: React.FC = () => {
     setEntry((prev) => ({ ...prev, category: value }));
   };
 
-  const handleAmountChange = (isCashOut: boolean) => {
+  const handleAmountChange = async (isCashOut: boolean) => {
     console.log("entry", entry);
-    const categoryInput = document.getElementById(
-      "category-input"
-    ) as HTMLSelectElement;
     if (entry.amount > 0 && entry.notes.length > 0) {
-      const action = cashCountSlice.actions.addEntry;
-      dispatch(
-        action({
-          entries: [
-            {
-              ...entry,
-              id: `INV${entryData?.entries.length}`,
-              isCashIn: !isCashOut,
-            },
-          ],
-          isCashIn: !isCashOut,
-        })
-      );
-      setEntry(initialState);
-      categoryInput.value = "";
-      setErrors({});
+      try {
+        const response = await fetch("/api/entry/add-entry", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            amount: entry.amount,
+            date: entry.date,
+            notes: entry.notes,
+            category: entry.category,
+            isCashIn: !isCashOut,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to add entry");
+        }
+
+        const data = await response.json();
+
+        // Dispatch to Redux store
+        dispatch(
+          cashCountSlice.actions.addEntry({
+            entries: [
+              {
+                ...entry,
+                id: `INV${entryData?.entries.length}`,
+                isCashIn: !isCashOut,
+              },
+            ],
+            isCashIn: !isCashOut,
+          })
+        );
+
+        setEntry(initialState);
+        const categoryInput = document.getElementById(
+          "category-input"
+        ) as HTMLSelectElement;
+        if (categoryInput) categoryInput.value = "";
+        setErrors({});
+      } catch (error) {
+        console.error("Error adding entry:", error);
+        setErrors((prev) => ({
+          ...prev,
+          amount: "Failed to add entry. Please try again.",
+        }));
+      }
     } else {
       setErrors((prev) => ({
         ...prev,
@@ -69,6 +99,33 @@ const AddAmount: React.FC = () => {
         notes: entry.notes.length <= 0 ? "Please enter a note" : "",
       }));
     }
+    // const categoryInput = document.getElementById(
+    //   "category-input"
+    // ) as HTMLSelectElement;
+    // if (entry.amount > 0 && entry.notes.length > 0) {
+    //   const action = cashCountSlice.actions.addEntry;
+    //   dispatch(
+    //     action({
+    //       entries: [
+    //         {
+    //           ...entry,
+    //           id: `INV${entryData?.entries.length}`,
+    //           isCashIn: !isCashOut,
+    //         },
+    //       ],
+    //       isCashIn: !isCashOut,
+    //     })
+    //   );
+    //   setEntry(initialState);
+    //   categoryInput.value = "";
+    //   setErrors({});
+    // } else {
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     amount: entry.amount <= 0 ? "Please enter a valid amount" : "",
+    //     notes: entry.notes.length <= 0 ? "Please enter a note" : "",
+    //   }));
+    // }
   };
 
   return (
