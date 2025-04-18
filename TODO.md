@@ -7,7 +7,7 @@ Todo
 -Search Page
 -Notifications (Low balance, Milestones)
 -Profile
--Login, logout, signup
--Authenication
+-Login, logout, signup✅
+-Authentication✅
 -Add CRUD
--Backend configuration (MongoDB & NodeJS)
+-Backend configuration (MongoDB & NodeJS) - in progress
