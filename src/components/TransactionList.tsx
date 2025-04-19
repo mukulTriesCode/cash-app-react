@@ -1,6 +1,8 @@
+import { Entry } from "@/features/cashCountSlice";
 import { RootState } from "@/store";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import LoadingSpinner from "./LoadingSpinner";
 
 const TransactionList: React.FC = () => {
   const root = useSelector((state: RootState) => state?.root);
@@ -40,27 +42,35 @@ const TransactionList: React.FC = () => {
           <li className="col-span-2">Amount</li>
         </TList>
         <ul data-lenis-prevent className="h-[590px] overflow-y-auto">
-          {entries?.map((val) => (
-            <li key={val?.id}>
-              <TList>
-                <li className="col-span-2">{val?.id}</li>
-                <li className="col-span-4">{val?.notes ? val?.notes : "--"}</li>
-                <li className="col-span-2">
-                  {val?.date ? new Date(val?.date).toLocaleDateString() : "--"}
-                </li>
-                <li className="col-span-2 capitalize">
-                  {val?.category ? val?.category : "--"}
-                </li>
-                <li
-                  className={`col-span-2 ${
-                    val?.isCashIn ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  ₹ {val?.amount ? val?.amount : "--"}
-                </li>
-              </TList>
-            </li>
-          ))}
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            entryData?.map((val, i) => (
+              <li key={i}>
+                <TList>
+                  <li className="col-span-2">{i}</li>
+                  <li className="col-span-4">
+                    {val?.notes ? val?.notes : "--"}
+                  </li>
+                  <li className="col-span-2">
+                    {val?.date
+                      ? new Date(val?.date).toLocaleDateString()
+                      : "--"}
+                  </li>
+                  <li className="col-span-2 capitalize">
+                    {val?.category ? val?.category : "--"}
+                  </li>
+                  <li
+                    className={`col-span-2 ${
+                      val?.isCashIn ? "text-green-500" : "text-red-500"
+                    }`}
+                  >
+                    ₹ {val?.amount ? val?.amount : "--"}
+                  </li>
+                </TList>
+              </li>
+            ))
+          )}
         </ul>
         <TList className="text-white/80 py-3 bg-[#232323] border-none rounded-md">
           <li className="">Total</li>
