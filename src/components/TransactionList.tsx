@@ -5,7 +5,30 @@ import { useSelector } from "react-redux";
 const TransactionList: React.FC = () => {
   const root = useSelector((state: RootState) => state?.root);
   const totalAmount = root?.totalAmount;
-  const entries = root?.entries || [];
+  const [entryData, setEntryData] = useState<Entry[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const token = localStorage.getItem("token");
+
+  const fetchEntries = async () => {
+    const res = await fetch(`/api/entry/user`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const { data } = await res.json();
+    setIsLoading(false);
+    setEntryData(data);
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchEntries();
+  }, []);
+
+  // const entries = root?.entries || [];
+
   return (
     <div className="w-[calc(100vw-32px)] xs:w-full overflow-auto p-4 h-full border border-white/15 rounded-md bg-[#131313] text-base">
       <div className="min-w-[640px] xs:min-w-full w-full">
