@@ -1,34 +1,57 @@
-import React, { Suspense, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import React, { Suspense, useEffect, useState } from "react";
+// import { useSelector } from "react-redux";
+// import { RootState } from "@/store";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Entry } from "@/features/cashCountSlice";
 import { FilterSVG } from "@/lib/Svgs";
 import { lazy } from "react";
+import axios from "axios";
 const TransactionVerticalSlider = lazy(
   () => import("./TransactionVerticalSlider")
 );
 
 const TransactionHistory: React.FC = () => {
-  const root = useSelector((state: RootState) => state?.root);
-  const entries = root?.entries || [];
-  const [filteredEntries, setFilteredEntries] = useState<Entry[]>(entries);
+  // const root = useSelector((state: RootState) => state?.root);
+  // const entries = root?.entries || [];
+  const [entries, setEntries] = useState<Entry[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [filteredEntries, setFilteredEntries] = useState<Entry[]>([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [isFilterSelected, setIsFilterSelected] = useState(false);
   const filterItems = [
     { label: "Cash In", id: "cash-in" },
     { label: "Cash Out", id: "cash-out" },
   ];
+  const token = sessionStorage.getItem("token");
+
+  const fetchEntries = async () => {
+    const res = await axios.get(`/api/entry/user`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const { data } = res.data;
+    setIsLoading(false);
+    setEntries(data);
+    setFilteredEntries(data);
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchEntries();
+  }, []);
 
   const handleFilterChange = (filterId: string) => {
-    const filteredEntries = entries.filter((entry) =>
+    const filteredEntry = entries.filter((entry) =>
       filterId === "cash-in"
         ? entry.isCashIn
         : filterId === "cash-out"
         ? !entry.isCashIn
         : null
     );
-    setFilteredEntries(filteredEntries);
+    setFilteredEntries(filteredEntry);
     setFilterOpen(false);
     setIsFilterSelected(true);
   };
@@ -81,15 +104,21 @@ const TransactionHistory: React.FC = () => {
         </div>
       </div>
       <div className="bg-gradient-to-bl from-gradient-red/40 to-gradient-blue/40 p-[2px] rounded-xl shadow-lg h-full">
-        <Suspense
-          fallback={
-            <div className="w-full max-h-[372px] h-full rounded-xl bg-black grid place-items-center">
-              Loading...
-            </div>
-          }
-        >
-          <TransactionVerticalSlider filteredEntries={filteredEntries} />
-        </Suspense>
+        {isLoading ? (
+          <div className="w-full max-h-[372px] h-full rounded-xl bg-black grid place-items-center">
+            <div className="ping"></div>
+          </div>
+        ) : (
+          <Suspense
+            fallback={
+              <div className="w-full max-h-[372px] h-full rounded-xl bg-black grid place-items-center">
+                Loading...
+              </div>
+            }
+          >
+            <TransactionVerticalSlider filteredEntries={filteredEntries} />
+          </Suspense>
+        )}
       </div>
     </div>
   );
