@@ -1,25 +1,26 @@
 import { Entry } from "@/features/cashCountSlice";
 import { RootState } from "@/store";
+import axios from "axios";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import LoadingSpinner from "./LoadingSpinner";
 
 const TransactionList: React.FC = () => {
   const root = useSelector((state: RootState) => state?.root);
   const totalAmount = root?.totalAmount;
   const [entryData, setEntryData] = useState<Entry[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const fetchEntries = async () => {
-    const res = await fetch(`/api/entry/user`, {
+    const res = await axios.get(`/api/entry/user`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    const { data } = await res.json();
+
+    const { data } = res.data;
     setIsLoading(false);
     setEntryData(data);
   };
@@ -43,7 +44,9 @@ const TransactionList: React.FC = () => {
         </TList>
         <ul data-lenis-prevent className="h-[590px] overflow-y-auto">
           {isLoading ? (
-            <LoadingSpinner />
+            <div className="h-full w-full flex justify-center items-center">
+              <div className="ping"></div>
+            </div>
           ) : (
             entryData?.map((val, i) => (
               <li key={i}>
@@ -74,7 +77,7 @@ const TransactionList: React.FC = () => {
         </ul>
         <TList className="text-white/80 py-3 bg-[#232323] border-none rounded-md">
           <li className="">Total</li>
-          <li className="col-start-11 col-end-12">₹ {totalAmount}</li>
+          <li className="col-start-11 col-span-2">₹ {totalAmount}</li>
         </TList>
       </div>
     </div>
