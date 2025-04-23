@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
   const action = profileSlice.actions.logoutProfile;
   const logOut = () => {
     dispatch(action());
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     navigate("/login");
   };
 

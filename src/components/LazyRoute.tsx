@@ -11,7 +11,7 @@ export const LazyRoute = ({
   component: Component,
   requiresAuth = false,
 }: LazyRouteProps) => {
-  const isAuthenticated = localStorage.getItem("token"); // Replace with your auth logic
+  const isAuthenticated = sessionStorage.getItem("token");
 
   if (requiresAuth && !isAuthenticated) {
     return <Navigate to="/login" replace />;

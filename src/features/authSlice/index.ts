@@ -11,7 +11,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  token: localStorage.getItem("token") || null,
+  token: sessionStorage.getItem("token") || null,
   isLoading: false,
   error: null,
 };
@@ -41,7 +41,7 @@ export const loginUser = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(`${API_URL}/login`, userData);
-      localStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("token", response.data.token);
       dispatch(addProfile(response.data.user));
       return response.data;
     } catch (error: any) {
@@ -54,7 +54,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { dispatch }) => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     dispatch(logoutProfile()); // Clear profile state
     return null;
   }

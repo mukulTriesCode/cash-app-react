@@ -32,7 +32,7 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       if (response.ok && data.token) {
-        localStorage.setItem("token", data.token);
+        sessionStorage.setItem("token", data.token);
         navigate("/"); // Redirect to home page after successful login
       } else {
         setError(data.message || "Invalid email or password");
