@@ -1,9 +1,10 @@
 import React, { lazy } from 'react';
-import { Virtual } from 'swiper/modules';
+import { Mousewheel, Virtual } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Entry } from "@/features/cashCountSlice";
 import { SWIPER_CONFIG, MAX_ENTRIES } from './SwiperConfig';
 import 'swiper/css/virtual';
+import 'swiper/css/mousewheel';
 import SwiperItemSkeleton from './SwiperItemSkeleton';
 
 const TransactionItem = lazy(() => import('../TransactionItem'));
@@ -18,7 +19,8 @@ const VerticalSwiper: React.FC<VerticalSwiperProps> = ({ entries }) => {
   return (
     <Swiper
       data-lenis-prevent
-      modules={[Virtual]}
+      modules={[Virtual, Mousewheel]}
+      mousewheel={true}
       {...SWIPER_CONFIG}
     >
       {displayEntries.map((entry, index) => (
