@@ -61,3 +61,7 @@ export const fetchData = async () => {
     console.error("Error fetching data: ", error);
   }
 };
+
+export const getToken = () => {
+  return sessionStorage.getItem("token");
+};
