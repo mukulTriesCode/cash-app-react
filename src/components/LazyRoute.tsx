@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Navigate } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
+import { getToken } from "@/lib/utils";
 
 interface LazyRouteProps {
   component: React.ComponentType;
@@ -11,7 +12,7 @@ export const LazyRoute = ({
   component: Component,
   requiresAuth = false,
 }: LazyRouteProps) => {
-  const isAuthenticated = sessionStorage.getItem("token");
+  const isAuthenticated = getToken();
 
   if (requiresAuth && !isAuthenticated) {
     return <Navigate to="/login" replace />;

@@ -1,4 +1,5 @@
 import { Entry } from "@/features/cashCountSlice";
+import { getToken } from "@/lib/utils";
 import { RootState } from "@/store";
 import axios from "axios";
 import React, { ReactNode, useEffect, useState } from "react";
@@ -9,8 +10,7 @@ const TransactionList: React.FC = () => {
   const totalAmount = root?.totalAmount;
   const [entryData, setEntryData] = useState<Entry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const token = sessionStorage.getItem("token");
+  const token = getToken();
 
   const fetchEntries = async () => {
     const res = await axios.get(`/api/entry/user`, {

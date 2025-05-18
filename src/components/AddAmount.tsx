@@ -10,10 +10,12 @@ import {
 } from "@/components/ui/select";
 import { RootState } from "@/store";
 import { cashCountSlice } from "@/features/cashCountSlice";
+import { getToken } from "@/lib/utils";
 
 const AddAmount: React.FC = () => {
   const dispatch = useDispatch();
   const entryData = useSelector((state: RootState) => state.root);
+  const token = getToken();
 
   const [errors, setErrors] = useState<{ amount?: string; notes?: string }>({});
   const initialState = {
@@ -40,6 +42,7 @@ const AddAmount: React.FC = () => {
     setEntry((prev) => ({ ...prev, category: value }));
   };
 
+
   const handleAmountChange = async (isCashOut: boolean) => {
     console.log("entry", entry);
     if (entry.amount > 0 && entry.notes.length > 0) {
@@ -48,7 +51,7 @@ const AddAmount: React.FC = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             amount: entry.amount,
@@ -64,7 +67,7 @@ const AddAmount: React.FC = () => {
         }
 
         const data = await response.json();
-        console.info(data)
+        console.info(data);
 
         // Dispatch to Redux store
         dispatch(

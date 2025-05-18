@@ -1,3 +1,4 @@
+import { getToken } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 // import { RootState } from "@/store";
 // import { useSelector } from "react-redux";
@@ -6,12 +7,13 @@ const Profile: React.FC = () => {
   // const profileData = useSelector((state: RootState) => state.profile);
   // const { id, username, email, password } = profileData || {};
   const [data, setData] = useState<{ _id: string; email: string } | null>(null);
+  const token = getToken();
   const fetchData = async () => {
     const res = await fetch("/api/user/profile", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     const data = await res.json();

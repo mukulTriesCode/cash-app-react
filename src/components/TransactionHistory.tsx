@@ -6,6 +6,7 @@ import { Entry } from "@/features/cashCountSlice";
 import { FilterSVG } from "@/lib/Svgs";
 import { lazy } from "react";
 import axios from "axios";
+import { getToken } from "@/lib/utils";
 const TransactionVerticalSlider = lazy(
   () => import("./TransactionVerticalSlider")
 );
@@ -22,7 +23,7 @@ const TransactionHistory: React.FC = () => {
     { label: "Cash In", id: "cash-in" },
     { label: "Cash Out", id: "cash-out" },
   ];
-  const token = sessionStorage.getItem("token");
+  const token = getToken();
 
   const fetchEntries = async () => {
     const res = await axios.get(`/api/entry/user`, {
