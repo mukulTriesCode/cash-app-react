@@ -1,6 +1,7 @@
+import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const token = sessionStorage.getItem("token");
+const token = getToken();
 
 export const userApi = createApi({
   reducerPath: "userApi",
