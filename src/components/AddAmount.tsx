@@ -40,46 +40,16 @@ const AddAmount: React.FC = () => {
     setEntry((prev) => ({ ...prev, category: value }));
   };
 
-
   const handleAmountChange = async (isCashOut: boolean) => {
-    console.log("entry", entry);
     if (entry.amount > 0 && entry.notes.length > 0) {
       try {
-        const response = await fetch("/api/entry/add-entry", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            amount: entry.amount,
-            date: entry.date,
-            notes: entry.notes,
-            category: entry.category,
-            isCashIn: !isCashOut,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to add entry");
-        }
-
-        const data = await response.json();
-        console.info(data);
-
-        // Dispatch to Redux store
-        dispatch(
-          cashCountSlice.actions.addEntry({
-            entries: [
-              {
-                ...entry,
-                id: `INV${entryData?.entries.length}`,
-                isCashIn: !isCashOut,
-              },
-            ],
-            isCashIn: !isCashOut,
-          })
-        );
+        await addEntry({
+          amount: entry.amount,
+          date: entry.date,
+          notes: entry.notes,
+          category: entry.category,
+          isCashIn: !isCashOut,
+        }).unwrap();
 
         setEntry(initialState);
         const categoryInput = document.getElementById(
