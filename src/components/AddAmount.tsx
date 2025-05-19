@@ -103,33 +103,6 @@ const AddAmount: React.FC = () => {
         notes: entry.notes.length <= 0 ? "Please enter a note" : "",
       }));
     }
-    // const categoryInput = document.getElementById(
-    //   "category-input"
-    // ) as HTMLSelectElement;
-    // if (entry.amount > 0 && entry.notes.length > 0) {
-    //   const action = cashCountSlice.actions.addEntry;
-    //   dispatch(
-    //     action({
-    //       entries: [
-    //         {
-    //           ...entry,
-    //           id: `INV${entryData?.entries.length}`,
-    //           isCashIn: !isCashOut,
-    //         },
-    //       ],
-    //       isCashIn: !isCashOut,
-    //     })
-    //   );
-    //   setEntry(initialState);
-    //   categoryInput.value = "";
-    //   setErrors({});
-    // } else {
-    //   setErrors((prev) => ({
-    //     ...prev,
-    //     amount: entry.amount <= 0 ? "Please enter a valid amount" : "",
-    //     notes: entry.notes.length <= 0 ? "Please enter a note" : "",
-    //   }));
-    // }
   };
 
   return (
