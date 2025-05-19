@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CalenderComponent from "@/components/Calender";
 import {
   Select,
@@ -9,13 +9,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RootState } from "@/store";
-import { cashCountSlice } from "@/features/cashCountSlice";
-import { getToken } from "@/lib/utils";
+import { useAddEntryMutation } from "@/services/entryService";
 
 const AddAmount: React.FC = () => {
-  const dispatch = useDispatch();
   const entryData = useSelector((state: RootState) => state.root);
-  const token = getToken();
+  const [addEntry] = useAddEntryMutation();
 
   const [errors, setErrors] = useState<{ amount?: string; notes?: string }>({});
   const initialState = {
