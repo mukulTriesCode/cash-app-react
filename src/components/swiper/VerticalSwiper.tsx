@@ -1,13 +1,13 @@
-import React, { lazy } from 'react';
-import { Mousewheel, Virtual } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React, { lazy } from "react";
+import { Mousewheel, Virtual } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Entry } from "@/features/cashCountSlice";
-import { SWIPER_CONFIG, MAX_ENTRIES } from './SwiperConfig';
-import 'swiper/css/virtual';
-import 'swiper/css/mousewheel';
-import SwiperItemSkeleton from './SwiperItemSkeleton';
+import { SWIPER_CONFIG, MAX_ENTRIES } from "./SwiperConfig";
+import "swiper/css/virtual";
+import "swiper/css/mousewheel";
+import SwiperItemSkeleton from "./SwiperItemSkeleton";
 
-const TransactionItem = lazy(() => import('../TransactionItem'));
+const TransactionItem = lazy(() => import("../TransactionItem"));
 
 interface VerticalSwiperProps {
   entries: Entry[];
@@ -24,7 +24,11 @@ const VerticalSwiper: React.FC<VerticalSwiperProps> = ({ entries }) => {
       {...SWIPER_CONFIG}
     >
       {displayEntries.map((entry, index) => (
-        <SwiperSlide key={entry?.id} virtualIndex={index} className='h-fit'>
+        <SwiperSlide
+          key={entry?.id + index}
+          virtualIndex={index}
+          className="h-fit"
+        >
           <React.Suspense fallback={<SwiperItemSkeleton />}>
             <TransactionItem
               entry={entry}
