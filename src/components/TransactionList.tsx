@@ -1,7 +1,6 @@
 import { Entry } from "@/features/cashCountSlice";
-import { getToken } from "@/lib/utils";
+import { useGetEntriesQuery } from "@/services/entryService";
 import { RootState } from "@/store";
-import axios from "axios";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
