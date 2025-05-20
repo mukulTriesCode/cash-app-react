@@ -1,6 +1,4 @@
 import React, { Suspense, useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-// import { RootState } from "@/store";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Entry } from "@/features/cashCountSlice";
 import { FilterSVG } from "@/lib/Svgs";
@@ -12,8 +10,6 @@ const TransactionVerticalSlider = lazy(
 );
 
 const TransactionHistory: React.FC = () => {
-  // const root = useSelector((state: RootState) => state?.root);
-  // const entries = root?.entries || [];
   const [entries, setEntries] = useState<Entry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [filteredEntries, setFilteredEntries] = useState<Entry[]>([]);
