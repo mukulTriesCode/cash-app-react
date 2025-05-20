@@ -18,9 +18,19 @@ export const addEntryApi = createApi({
         body,
       }),
     }),
+    getEntries: build.query({
+      query: () => ({
+        url: `/api/entry/user`,
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddEntryMutation } = addEntryApi;
+export const { useAddEntryMutation, useGetEntriesQuery } = addEntryApi;
