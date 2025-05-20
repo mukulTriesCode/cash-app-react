@@ -9,28 +9,12 @@ const TransactionList: React.FC = () => {
   const root = useSelector((state: RootState) => state?.root);
   const totalAmount = root?.totalAmount;
   const [entryData, setEntryData] = useState<Entry[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const token = getToken();
 
-  const fetchEntries = async () => {
-    const res = await axios.get(`/api/entry/user`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const { data } = res.data;
-    setIsLoading(false);
-    setEntryData(data);
-  };
+  const { data, isLoading } = useGetEntriesQuery("");
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchEntries();
-  }, []);
-
-  // const entries = root?.entries || [];
+    setEntryData(data?.data);
+  }, [data]);
 
   return (
     <div className="w-[calc(100vw-32px)] xs:w-full overflow-auto p-4 h-full border border-white/15 rounded-md bg-[#131313] text-base">
