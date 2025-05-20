@@ -3,15 +3,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Entry } from "@/features/cashCountSlice";
 import { FilterSVG } from "@/lib/Svgs";
 import { lazy } from "react";
-import axios from "axios";
-import { getToken } from "@/lib/utils";
+import { useGetEntriesQuery } from "@/services/entryService";
 const TransactionVerticalSlider = lazy(
   () => import("./TransactionVerticalSlider")
 );
 
 const TransactionHistory: React.FC = () => {
   const [entries, setEntries] = useState<Entry[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [filteredEntries, setFilteredEntries] = useState<Entry[]>([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [isFilterSelected, setIsFilterSelected] = useState(false);
@@ -19,26 +17,13 @@ const TransactionHistory: React.FC = () => {
     { label: "Cash In", id: "cash-in" },
     { label: "Cash Out", id: "cash-out" },
   ];
-  const token = getToken();
 
-  const fetchEntries = async () => {
-    const res = await axios.get(`/api/entry/user`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const { data } = res.data;
-    setIsLoading(false);
-    setEntries(data);
-    setFilteredEntries(data);
-  };
+  const { data, isLoading } = useGetEntriesQuery("");
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchEntries();
-  }, []);
+    setEntries(data?.data);
+    setFilteredEntries(data?.data);
+  }, [data]);
 
   const handleFilterChange = (filterId: string) => {
     const filteredEntry = entries.filter((entry) =>
