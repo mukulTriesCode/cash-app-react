@@ -1,20 +1,23 @@
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const token = getToken();
-
 export const addEntryApi = createApi({
   reducerPath: "addEntryApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "/",
+    prepareHeaders: (headers) => {
+      const token = getToken();
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (build) => ({
     addEntry: build.mutation({
       query: (body) => ({
         url: `/api/entry/add-entry`,
         method: "POST",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${token}`,
-        },
         body,
       }),
     }),
@@ -22,10 +25,6 @@ export const addEntryApi = createApi({
       query: () => ({
         url: `/api/entry/user`,
         method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${token}`,
-        },
       }),
     }),
   }),
