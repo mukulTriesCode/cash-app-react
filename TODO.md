@@ -11,3 +11,15 @@ Todo
 -Authentication✅
 -Add CRUD
 -Backend configuration (MongoDB & NodeJS) - in progress
+-RTK Query - in progress
+    -Handle Categories
+    -Handle Transactions
+    -Handle Users
+    -Handle Auth
+    -Handle Notifications
+    -Handle Profile
+    -Handle Settings
+    -Handle Charts
+    -Handle Search
+    -Handle Filters
+    -Handle Sorting
