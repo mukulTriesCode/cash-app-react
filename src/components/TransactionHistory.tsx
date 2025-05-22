@@ -94,7 +94,7 @@ const TransactionHistory: React.FC = () => {
           <Suspense
             fallback={
               <div className="w-full max-h-[372px] h-full rounded-xl bg-black grid place-items-center">
-                Loading...
+                <div className="ping"></div>
               </div>
             }
           >
