@@ -16,10 +16,7 @@ Todo
     -Handle Transactions
     -Handle Users
     -Handle Auth
-    -Handle Notifications
     -Handle Profile
-    -Handle Settings
     -Handle Charts
-    -Handle Search
-    -Handle Filters
-    -Handle Sorting
+-Redux
+    -Handle Notifications
