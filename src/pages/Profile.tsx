@@ -1,11 +1,7 @@
 import { useGetUserQuery } from "@/services/profileService";
 import React from "react";
-// import { RootState } from "@/store";
-// import { useSelector } from "react-redux";
 
 const Profile: React.FC = () => {
-  // const profileData = useSelector((state: RootState) => state.profile);
-  // const { id, username, email, password } = profileData || {};
   const { data, isLoading } = useGetUserQuery("");
   const user = data?.user;
   return (
