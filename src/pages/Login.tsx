@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<{ email: string; password: string }>(
+    { email: "", password: "" }
+  );
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
   const navigate = useNavigate();
