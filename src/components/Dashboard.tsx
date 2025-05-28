@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-// import CashBoard from "./CashBoard";
 const CashBoard = React.lazy(() => import("./CashBoard"));
 const CategorySlider = React.lazy(() => import("./CategorySlider"));
 const CashChart = React.lazy(() => import("./CashChart"));
