@@ -1,15 +1,8 @@
 import React, { FormEvent, useState } from "react";
-// @ts-ignore
-import { useDispatch, useSelector } from "react-redux";
-// @ts-ignore
-import { AppDispatch, RootState } from "@/store"; // Add AppDispatch import
 import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
-// import { registerUser } from "@/features/profileSlice"; // Adjust the import path
 
 const RegisterForm: React.FC = () => {
-  // const dispatch = useDispatch<AppDispatch>();
-  // const { error } = useSelector((state: RootState) => state.profile);
   const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
