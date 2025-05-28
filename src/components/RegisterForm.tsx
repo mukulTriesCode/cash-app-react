@@ -61,6 +61,7 @@ const RegisterForm: React.FC = () => {
       }
     } catch (err) {
       console.error("Registration error:", err);
+      setError("Registration failed");
     } finally {
       setIsLoading(false);
     }
