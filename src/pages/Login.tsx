@@ -11,10 +11,6 @@ const Login: React.FC = () => {
   const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  // const BASE_URL = import.meta.env.VITE_IS_PRODUCTION
-  //   ? import.meta.env.VITE_API_URL + "/api"
-  //   : "/api";
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
