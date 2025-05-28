@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // const BASE_URL = import.meta.env.VITE_IS_PRODUCTION
@@ -15,10 +17,20 @@ const Login: React.FC = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const handleRecaptcha = (token: string | null) => {
+    setIsValidCaptcha(token ? true : false);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    if (!isValidCaptcha) {
+      setError("Please complete the captcha verification");
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch(`api/login`, {
@@ -47,14 +59,9 @@ const Login: React.FC = () => {
 
   return (
     <div className="w-full max-w-[500px]">
-      <form
-        onSubmit={handleSubmit}
-        className="flex gap-4 flex-col"
-      >
+      <form onSubmit={handleSubmit} className="flex gap-4 flex-col">
         <h1 className="text-4xl">Login</h1>
         {/* <h5 className="text-2xl">Login</h5> */}
-
-        {error && <p className="text-red-500 text-center">{error}</p>}
 
         <input
           className="bg-transparent border border-white/15 p-3 px-5 rounded-md"
@@ -74,7 +81,11 @@ const Login: React.FC = () => {
           placeholder="Password"
           required
         />
-
+        <ReCAPTCHA
+          sitekey={import.meta.env.VITE_GOOGLE_RECAPTCHA_SITE_KEY}
+          onChange={handleRecaptcha}
+        />
+        {error && <p className="text-red-500 text-center">{error}</p>}
         <button
           className="w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-lg cursor-pointer"
           type="submit"
