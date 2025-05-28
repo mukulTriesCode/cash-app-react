@@ -12,7 +12,6 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import profileSlice from "@/features/profileSlice";
-import authSlice from "@/features/authSlice";
 import { userApi } from "@/services/profileService";
 import { addEntryApi } from "@/services/entryService";
 
@@ -24,7 +23,6 @@ const persistConfig = {
 const persistedReducers = {
   root: persistReducer(persistConfig, cashCountSlice),
   profile: persistReducer(persistConfig, profileSlice),
-  auth: persistReducer(persistConfig, authSlice),
   [userApi.reducerPath]: userApi.reducer,
   [addEntryApi.reducerPath]: addEntryApi.reducer,
 };
