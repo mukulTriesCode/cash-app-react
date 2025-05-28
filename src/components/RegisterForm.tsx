@@ -12,7 +12,11 @@ const RegisterForm: React.FC = () => {
   const { loading, error } = useSelector((state: RootState) => state.profile);
   const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    username: string;
+    email: string;
+    password: string;
+  }>({
     username: "",
     email: "",
     password: "",
