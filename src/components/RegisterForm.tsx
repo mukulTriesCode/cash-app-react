@@ -3,14 +3,16 @@ import React, { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // @ts-ignore
 import { AppDispatch, RootState } from "@/store"; // Add AppDispatch import
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 // import { registerUser } from "@/features/profileSlice"; // Adjust the import path
 
 const RegisterForm: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>();
-  const { loading, error } = useSelector((state: RootState) => state.profile);
+  const { error } = useSelector((state: RootState) => state.profile);
   const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<{
     username: string;
@@ -34,8 +36,10 @@ const RegisterForm: React.FC = () => {
   };
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     if (!isValidCaptcha) {
       console.error("Invalid reCAPTCHA");
+      setIsLoading(false);
       return;
     }
     try {
@@ -57,12 +61,14 @@ const RegisterForm: React.FC = () => {
           password: "",
         });
         console.log("Registration successful");
-        // You might want to redirect here
+        navigate("/login");
       } else {
         console.error(data.message || "Registration failed");
       }
     } catch (err) {
       console.error("Registration error:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -80,7 +86,6 @@ const RegisterForm: React.FC = () => {
         value={formData.username}
         onChange={handleInputChange}
         placeholder="Username"
-        disabled={loading}
         required
       />
       <input
@@ -90,7 +95,6 @@ const RegisterForm: React.FC = () => {
         value={formData.email}
         onChange={handleInputChange}
         placeholder="Email"
-        disabled={loading}
         required
       />
       <input
@@ -100,7 +104,6 @@ const RegisterForm: React.FC = () => {
         value={formData.password}
         onChange={handleInputChange}
         placeholder="Password"
-        disabled={loading}
         required
       />
       <ReCAPTCHA
@@ -110,9 +113,8 @@ const RegisterForm: React.FC = () => {
       <button
         className="w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         type="submit"
-        disabled={loading}
       >
-        {loading ? "Signing Up..." : "Sign Up"}
+        {isLoading ? "Signing Up..." : "Sign Up"}
       </button>
       {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       <div className="flex items-center justify-center gap-2 mt-4">
