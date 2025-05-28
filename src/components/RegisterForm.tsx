@@ -4,17 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 // @ts-ignore
 import { AppDispatch, RootState } from "@/store"; // Add AppDispatch import
 import { Link } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 // import { registerUser } from "@/features/profileSlice"; // Adjust the import path
 
 const RegisterForm: React.FC = () => {
   // const dispatch = useDispatch<AppDispatch>();
   const { loading, error } = useSelector((state: RootState) => state.profile);
+  const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
 
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
+
+  const handleRecaptcha = (token: string | null) => {
+    setIsValidCaptcha(token ? true : false);
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -24,6 +30,10 @@ const RegisterForm: React.FC = () => {
   };
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!isValidCaptcha) {
+      console.error("Invalid reCAPTCHA");
+      return;
+    }
     try {
       const response = await fetch(`api/register`, {
         method: "POST",
@@ -88,6 +98,10 @@ const RegisterForm: React.FC = () => {
         placeholder="Password"
         disabled={loading}
         required
+      />
+      <ReCAPTCHA
+        sitekey={import.meta.env.VITE_GOOGLE_RECAPTCHA_SITE_KEY}
+        onChange={handleRecaptcha}
       />
       <button
         className="w-full text-center px-4 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
