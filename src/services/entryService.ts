@@ -1,3 +1,4 @@
+import { Entry } from "@/features/cashCountSlice";
 import { getToken } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -13,19 +14,22 @@ export const addEntryApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Entry"],
   endpoints: (build) => ({
-    addEntry: build.mutation({
+    addEntry: build.mutation<Entry, Partial<Entry>>({
       query: (body) => ({
         url: `/api/entry/add-entry`,
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Entry"],
     }),
     getEntries: build.query({
       query: () => ({
         url: `/api/entry/user`,
         method: "GET",
       }),
+      providesTags: ["Entry"],
     }),
   }),
 });
