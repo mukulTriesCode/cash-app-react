@@ -2,17 +2,15 @@ import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CategoryCard from "./CategoryCard";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import { NextSVG, PreviousSVG } from "@/lib/Svgs";
+import { useGetCategoryQuery } from "@/services/entryService";
 
 const CategorySlider: React.FC = () => {
   const swiperRef = useRef<SwiperRef>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const root = useSelector((state: RootState) => state.root);
-  const categories = root?.categories || [];
-  const entries = root?.entries || [];
+  const [categories, setCategories] = useState([]);
+  const { data, isLoading } = useGetCategoryQuery("");
   // const images = [
   //   "../assets/art1.webp",
   //   "../assets/art2.webp",
@@ -40,6 +38,10 @@ const CategorySlider: React.FC = () => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    setCategories(data?.data);
+  }, [data]);
 
   return (
     <>
@@ -76,32 +78,31 @@ const CategorySlider: React.FC = () => {
           </div>
         </div>
       </div>
-      {categories && categories?.length > 0 ? (
+      {isLoading ? (
+        <div className="w-full h-[370px] mt-6 grid place-items-center text-xl">
+          {/* Getting Categories */}
+        </div>
+      ) : categories && categories?.length > 0 ? (
         <Swiper
           className="mt-6"
           ref={swiperRef}
           spaceBetween={26}
           slidesPerView={"auto"}
         >
-          {categories?.map((category, index, arr) => {
-            const categoryTotal = entries
-              ?.filter((entry) => entry?.category === category?.name)
-              .reduce(
-                (total, val) =>
-                  total + (val?.isCashIn ? val?.amount : -val?.amount || 0),
-                0
+          {categories?.map(
+            (category: { name: string; _id: string }, index, arr) => {
+              return (
+                <SwiperSlide className="max-w-[242px]" key={category._id}>
+                  <CategoryCard
+                    category={category}
+                    categoryTotal={80}
+                    index={index}
+                    length={arr?.length}
+                  />
+                </SwiperSlide>
               );
-            return (
-              <SwiperSlide className="max-w-[242px]" key={index}>
-                <CategoryCard
-                  category={category}
-                  categoryTotal={categoryTotal}
-                  index={index}
-                  length={arr?.length}
-                />
-              </SwiperSlide>
-            );
-          })}
+            }
+          )}
         </Swiper>
       ) : (
         <div className="w-full h-[370px] mt-6 grid place-items-center text-xl">
