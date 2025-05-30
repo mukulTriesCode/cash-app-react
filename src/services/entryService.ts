@@ -31,9 +31,17 @@ export const addEntryApi = createApi({
       }),
       providesTags: ["Entry"],
     }),
+    getCategory: build.query({
+      query: () => ({
+        url: `/api/categories`,
+        method: "GET",
+      }),
+      providesTags: ["Entry"],
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddEntryMutation, useGetEntriesQuery } = addEntryApi;
+export const { useAddEntryMutation, useGetEntriesQuery, useGetCategoryQuery } =
+  addEntryApi;
