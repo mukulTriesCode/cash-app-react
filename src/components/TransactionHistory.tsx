@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Entry } from "@/features/cashCountSlice";
+import type { Entry } from "@/features/cashCountSlice";
 import { FilterSVG } from "@/lib/Svgs";
 import { lazy } from "react";
 import { useGetEntriesQuery } from "@/services/entryService";
