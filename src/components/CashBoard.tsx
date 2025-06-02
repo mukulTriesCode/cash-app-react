@@ -8,12 +8,11 @@ import { HeartSVG } from "@/lib/Svgs";
 import useMobile from "@/hooks/useMobile";
 
 const CashBoard: React.FC = () => {
-  const { root, profile } = useSelector((state: RootState) => state);
-  const username = profile?.username;
-  const email = profile?.email;
+  const root = useSelector((state: RootState) => state?.root);
+  const username = "";
+  const email = "";
   const totalAmount = root?.totalAmount;
-  const entries = root?.entries || [];
-  const openingBalance = entries.length > 0 ? entries[0].amount : 0;
+  const openingBalance = 0;
   const isMobile = useMobile(834);
 
   return (
