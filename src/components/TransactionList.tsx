@@ -1,4 +1,5 @@
 import type { Entry } from "@/features/cashCountSlice";
+// import useLoader from "@/hooks/useLoader";
 import { useGetEntriesQuery } from "@/services/entryService";
 import { RootState } from "@/store";
 import React, { ReactNode, useEffect, useState } from "react";
@@ -8,12 +9,12 @@ const TransactionList: React.FC = () => {
   const root = useSelector((state: RootState) => state?.root);
   const totalAmount = root?.totalAmount;
   const [entryData, setEntryData] = useState<Entry[]>([]);
-
   const { data, isLoading } = useGetEntriesQuery("");
 
+  // const loader = useLoader(isLoading);
   useEffect(() => {
     if (!isLoading) {
-    setEntryData(data?.data);
+      setEntryData(data?.data);
     }
   }, [isLoading, data]);
 
@@ -36,7 +37,7 @@ const TransactionList: React.FC = () => {
             entryData?.map((val, i) => (
               <li key={i}>
                 <TList>
-                  <li className="col-span-2">{i}</li>
+                  <li className="col-span-2">{i + 1}</li>
                   <li className="col-span-4">
                     {val?.notes ? val?.notes : "--"}
                   </li>
