@@ -1,4 +1,4 @@
-import { Entry } from "@/features/cashCountSlice";
+import type { Entry } from "@/features/cashCountSlice";
 import { useGetEntriesQuery } from "@/services/entryService";
 import { RootState } from "@/store";
 import React, { ReactNode, useEffect, useState } from "react";
