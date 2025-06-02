@@ -12,8 +12,10 @@ const TransactionList: React.FC = () => {
   const { data, isLoading } = useGetEntriesQuery("");
 
   useEffect(() => {
+    if (!isLoading) {
     setEntryData(data?.data);
-  }, [data]);
+    }
+  }, [isLoading, data]);
 
   return (
     <div className="w-[calc(100vw-32px)] xs:w-full overflow-auto p-4 h-full border border-white/15 rounded-md bg-[#131313] text-base">
