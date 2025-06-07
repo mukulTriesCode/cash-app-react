@@ -1,9 +1,5 @@
 import type { Entry } from "@/features/cashCountSlice";
-// import useLoader from "@/hooks/useLoader";
-import { useGetEntriesQuery } from "@/services/entryService";
-import { RootState } from "@/store";
-import React, { ReactNode, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { ReactNode } from "react";
 
 const TransactionList: React.FC<{ totalAmount: number; entries: Entry[] }> = ({
   totalAmount,
