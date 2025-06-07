@@ -1,6 +1,13 @@
 import { RootState } from "@/store";
 import React from "react";
-import { useSelector } from "react-redux";
+
+interface Entries {
+  totalAmount: number;
+  lastEntry: {
+    amount: number;
+    notes: string;
+  } | null;
+}
 
 const TotalData: React.FC = () => {
   const cashEntry = useSelector((state: RootState) => state?.root);
