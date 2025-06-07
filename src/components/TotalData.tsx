@@ -16,22 +16,9 @@ const TotalData: React.FC<Entries> = (entries) => {
         <p>Total amount : {entries?.totalAmount}</p>
         <p>
           Recent Transaction :{" "}
-          {cashEntry?.entries.length > 0 && (
-            <>
-              {
-                cashEntry?.entries?.filter(
-                  (val, i, arr) => i === arr.length - 1 && val?.amount
-                )[0]?.amount
-              }{" "}
-              {cashEntry?.entries?.filter(
-                (val, i, arr) => i === arr.length - 1 && val?.notes
-              )[0]?.notes && (
-                `(${cashEntry?.entries?.filter(
-                  (val, i, arr) => i === arr.length - 1 && val?.notes
-                )[0]?.notes})`
-              )}
-            </>
-          )}
+          {entries?.lastEntry?.amount &&
+            entries?.lastEntry?.notes &&
+            `${entries?.lastEntry?.amount} (${entries?.lastEntry?.notes})`}
         </p>
       </div>
     </div>
