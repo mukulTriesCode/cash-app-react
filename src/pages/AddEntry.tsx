@@ -1,6 +1,8 @@
 import AddAmount from "@/components/AddAmount";
 import TotalData from "@/components/TotalData";
 import TransactionList from "@/components/TransactionList";
+import useLoader from "@/hooks/useLoader";
+import { useGetEntriesQuery } from "@/services/entryService";
 import React from "react";
 
 const AddEntry: React.FC = () => {
