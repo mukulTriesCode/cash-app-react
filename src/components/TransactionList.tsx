@@ -5,18 +5,11 @@ import { RootState } from "@/store";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-const TransactionList: React.FC = () => {
-  const root = useSelector((state: RootState) => state?.root);
-  const totalAmount = root?.totalAmount;
-  const [entryData, setEntryData] = useState<Entry[]>([]);
-  const { data, isLoading } = useGetEntriesQuery("");
-
-  // const loader = useLoader(isLoading);
-  useEffect(() => {
-    if (!isLoading) {
-      setEntryData(data?.data);
-    }
-  }, [isLoading, data]);
+const TransactionList: React.FC<{ totalAmount: number; entries: Entry[] }> = ({
+  totalAmount,
+  entries,
+}) => {
+  const entryData: Entry[] = entries || [];
 
   return (
     <div className="w-[calc(100vw-32px)] xs:w-full overflow-auto p-4 h-full border border-white/15 rounded-md bg-[#131313] text-base">
