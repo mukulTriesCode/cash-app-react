@@ -22,37 +22,27 @@ const TransactionList: React.FC<{ totalAmount: number; entries: Entry[] }> = ({
           <li className="col-span-2">Amount</li>
         </TList>
         <ul data-lenis-prevent className="h-[590px] overflow-y-auto">
-          {isLoading ? (
-            <div className="h-full w-full flex justify-center items-center">
-              <div className="ping"></div>
-            </div>
-          ) : (
-            entryData?.map((val, i) => (
-              <li key={i}>
-                <TList>
-                  <li className="col-span-2">{i + 1}</li>
-                  <li className="col-span-4">
-                    {val?.notes ? val?.notes : "--"}
-                  </li>
-                  <li className="col-span-2">
-                    {val?.date
-                      ? new Date(val?.date).toLocaleDateString()
-                      : "--"}
-                  </li>
-                  <li className="col-span-2 capitalize">
-                    {val?.category ? val?.category : "--"}
-                  </li>
-                  <li
-                    className={`col-span-2 ${
-                      val?.isCashIn ? "text-green-500" : "text-red-500"
-                    }`}
-                  >
-                    ₹ {val?.amount ? val?.amount : "--"}
-                  </li>
-                </TList>
-              </li>
-            ))
-          )}
+          {entryData?.map((val, i) => (
+            <li key={i}>
+              <TList>
+                <li className="col-span-2">{i + 1}</li>
+                <li className="col-span-4">{val?.notes ? val?.notes : "--"}</li>
+                <li className="col-span-2">
+                  {val?.date ? new Date(val?.date).toLocaleDateString() : "--"}
+                </li>
+                <li className="col-span-2 capitalize">
+                  {val?.category ? val?.category : "--"}
+                </li>
+                <li
+                  className={`col-span-2 ${
+                    val?.isCashIn ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  ₹ {val?.amount ? val?.amount : "--"}
+                </li>
+              </TList>
+            </li>
+          ))}
         </ul>
         <TList className="text-white/80 py-3 bg-[#232323] border-none rounded-md">
           <li className="">Total</li>
