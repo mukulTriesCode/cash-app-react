@@ -21,7 +21,7 @@ const AddEntry: React.FC = () => {
         <AddAmount />
       </div>
       <div className="col-span-7 lg:col-span-5 xl:col-span-3">
-        <TransactionList />
+        <TransactionList totalAmount={totalAmount} entries={data?.data} />
       </div>
     </div>
   );
