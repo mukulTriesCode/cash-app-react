@@ -1,4 +1,3 @@
-import { RootState } from "@/store";
 import React from "react";
 
 interface Entries {
@@ -9,9 +8,7 @@ interface Entries {
   } | null;
 }
 
-const TotalData: React.FC = () => {
-  const cashEntry = useSelector((state: RootState) => state?.root);
-
+const TotalData: React.FC<Entries> = (entries) => {
   return (
     <div className="mb-4 xs:mb-7 w-full p-4 border border-white/15 rounded-md bg-[#131313] flex flex-col gap-3">
       <h2 className="text-2xl font-semibold">Record</h2>
