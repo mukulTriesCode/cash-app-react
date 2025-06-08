@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import ValContext from "../helpers/Context/ValContext";
 import { CrossSVG, NavSVG, SearchSVG } from "@/lib/Svgs";
@@ -8,21 +8,38 @@ import { IoMdAddCircle as AddEntryIcon } from "react-icons/io";
 import { CgProfile as ProfileIcon } from "react-icons/cg";
 import useMobile from "@/hooks/useMobile";
 
+const navLinks = [
+  { path: "/", label: "Home", icon: <HomeIcon /> },
+  { path: "/add-entry", label: "Add Entry", icon: <AddEntryIcon /> },
+  { path: "/category", label: "Category", icon: <CategoryIcon /> },
+  { path: "/profile", label: "Profile", icon: <ProfileIcon /> },
+];
+
 const Sidebar: React.FC = () => {
   const context = useContext(ValContext);
   const { val, toggleVal } = context || {};
   const isMobile = useMobile(640);
+  const sidebarRef = useRef(null);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      sidebarRef.current &&
+      !(sidebarRef.current as HTMLElement).contains(event.target as Node)
+    ) {
+      toggleVal && toggleVal();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
 
-  const navLinks = [
-    { path: "/", label: "Home", icon: <HomeIcon /> },
-    { path: "/add-entry", label: "Add Entry", icon: <AddEntryIcon /> },
-    { path: "/category", label: "Category", icon: <CategoryIcon /> },
-    { path: "/profile", label: "Profile", icon: <ProfileIcon /> },
-  ];
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [toggleVal]);
 
   return (
     <div className="flex relative">
       <div
+        ref={sidebarRef}
         className={`bg-[#131313] fixed z-[1000] border-r-[0.5px] border-white/10 h-screen transition-all duration-300 ${
           val ? "w-full xs:w-72" : "w-0 xs:w-[88px] xs:overflow-hidden"
         }`}
