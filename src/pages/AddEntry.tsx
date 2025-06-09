@@ -3,11 +3,13 @@ import TotalData from "@/components/TotalData";
 import TransactionList from "@/components/TransactionList";
 import useLoader from "@/hooks/useLoader";
 import { useGetEntriesQuery } from "@/services/entryService";
-import React from "react";
+import React, { useEffect } from "react";
 
 const AddEntry: React.FC = () => {
   const { data, isLoading } = useGetEntriesQuery("");
-  useLoader(isLoading);
+  useEffect(() => {
+    useLoader(isLoading);
+  }, [isLoading]);
   const totalAmount = data?.totalAmount;
   const lastEntry = data?.data?.length > 0 ? {
     amount: data.data[data.data.length - 1]?.amount,

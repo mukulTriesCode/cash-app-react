@@ -12,7 +12,9 @@ const CategorySlider: React.FC = () => {
   const [isEnd, setIsEnd] = useState(false);
   const [categories, setCategories] = useState([]);
   const { data, isLoading } = useGetCategoryQuery("");
-  useLoader(isLoading);
+  useEffect(() => {
+    useLoader(isLoading);
+  }, [isLoading]);
   // const images = [
   //   "../assets/art1.webp",
   //   "../assets/art2.webp",
