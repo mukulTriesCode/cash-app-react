@@ -22,6 +22,7 @@ const Sidebar: React.FC = () => {
   const sidebarRef = useRef(null);
   const handleClickOutside = (event: MouseEvent) => {
     if (
+      val &&
       sidebarRef.current &&
       !(sidebarRef.current as HTMLElement).contains(event.target as Node)
     ) {
