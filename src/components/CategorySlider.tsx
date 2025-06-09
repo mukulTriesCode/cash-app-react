@@ -4,6 +4,7 @@ import "swiper/css";
 import CategoryCard from "./CategoryCard";
 import { NextSVG, PreviousSVG } from "@/lib/Svgs";
 import { useGetCategoryQuery } from "@/services/entryService";
+import useLoader from "@/hooks/useLoader";
 
 const CategorySlider: React.FC = () => {
   const swiperRef = useRef<SwiperRef>(null);
@@ -11,6 +12,7 @@ const CategorySlider: React.FC = () => {
   const [isEnd, setIsEnd] = useState(false);
   const [categories, setCategories] = useState([]);
   const { data, isLoading } = useGetCategoryQuery("");
+  useLoader(isLoading);
   // const images = [
   //   "../assets/art1.webp",
   //   "../assets/art2.webp",

@@ -4,6 +4,7 @@ import type { Entry } from "@/features/cashCountSlice";
 import { FilterSVG } from "@/lib/Svgs";
 import { lazy } from "react";
 import { useGetEntriesQuery } from "@/services/entryService";
+import useLoader from "@/hooks/useLoader";
 const TransactionVerticalSlider = lazy(
   () => import("./TransactionVerticalSlider")
 );
@@ -19,6 +20,7 @@ const TransactionHistory: React.FC = () => {
   ];
 
   const { data, isLoading } = useGetEntriesQuery("");
+  useLoader(isLoading);
 
   useEffect(() => {
     setEntries(data?.data);
