@@ -20,9 +20,10 @@ const TransactionHistory: React.FC = () => {
   ];
 
   const { data, isLoading } = useGetEntriesQuery("");
-  useEffect(() => {
-    useLoader(isLoading);
-  }, [isLoading]);
+  // console.log("isLoadingT", isLoading);
+  // useLoader(isLoading);
+  // useEffect(() => {
+  // }, [isLoading]);
 
   useEffect(() => {
     setEntries(data?.data);
