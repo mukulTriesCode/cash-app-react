@@ -7,14 +7,17 @@ import React, { useEffect } from "react";
 
 const AddEntry: React.FC = () => {
   const { data, isLoading } = useGetEntriesQuery("");
-  useEffect(() => {
-    useLoader(isLoading);
-  }, [isLoading]);
+  // useEffect(() => {
+  // }, [isLoading]);
+  useLoader(isLoading);
   const totalAmount = data?.totalAmount;
-  const lastEntry = data?.data?.length > 0 ? {
-    amount: data.data[data.data.length - 1]?.amount,
-    notes: data.data[data.data.length - 1]?.notes
-  } : null;
+  const lastEntry =
+    data?.data?.length > 0
+      ? {
+          amount: data.data[data.data.length - 1]?.amount,
+          notes: data.data[data.data.length - 1]?.notes,
+        }
+      : null;
 
   return (
     <div className="p-4 xs:p-7 grid grid-cols-7 xl:grid-cols-4 gap-4 xs:gap-7">
