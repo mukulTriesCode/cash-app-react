@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import useLoader from "@/hooks/useLoader";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<{ email: string; password: string }>(
@@ -10,6 +11,7 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isValidCaptcha, setIsValidCaptcha] = useState<boolean>(false);
   const navigate = useNavigate();
+  useLoader(false)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
