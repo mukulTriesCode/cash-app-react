@@ -1,18 +1,25 @@
+// features/loaderSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: { loading: boolean } = {
+const initialState = {
   loading: false,
+  pendingRequests: 0,
 };
 
-export const loaderSlice = createSlice({
-  name: "loaderSlice",
+const loaderSlice = createSlice({
+  name: "loader",
   initialState,
   reducers: {
-    isLoading: (state, action) => {
-      state.loading = action.payload;
+    incrementPending: (state) => {
+      state.pendingRequests++;
+      state.loading = true;
+    },
+    decrementPending: (state) => {
+      state.pendingRequests = Math.max(0, state.pendingRequests - 1);
+      state.loading = state.pendingRequests > 0;
     },
   },
 });
 
-export const { isLoading } = loaderSlice.actions;
+export const { incrementPending, decrementPending } = loaderSlice.actions;
 export default loaderSlice.reducer;
