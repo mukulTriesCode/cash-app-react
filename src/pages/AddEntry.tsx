@@ -1,7 +1,7 @@
 import AddAmount from "@/components/AddAmount";
 import TotalData from "@/components/TotalData";
 import TransactionList from "@/components/TransactionList";
-import useLoader from "@/hooks/useLoader";
+// import useLoader from "@/hooks/useLoader";
 import { useGetEntriesQuery } from "@/services/entryService";
 import React, { useEffect } from "react";
 
@@ -9,7 +9,7 @@ const AddEntry: React.FC = () => {
   const { data, isLoading } = useGetEntriesQuery("");
   // useEffect(() => {
   // }, [isLoading]);
-  useLoader(isLoading);
+  // useLoader(isLoading);
   const totalAmount = data?.totalAmount;
   const lastEntry =
     data?.data?.length > 0
