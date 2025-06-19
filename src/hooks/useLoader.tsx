@@ -1,24 +1,14 @@
-import { loaderSlice } from "@/features/loaderSlice";
-import { RootState } from "@/store";
-import { useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// hooks/useLoader.ts
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import isLoading from "@/features/loaderSlice";
 
-const useLoader = (isLoading: boolean) => {
+const useLoader = (loading: boolean) => {
   const dispatch = useDispatch();
-  const loader = useSelector((state: RootState) => state?.loader);
-  const loadingAction = loaderSlice?.actions?.isLoading;
-
-  const handleLoading = useCallback(() => {
-    if (loadingAction) {
-      dispatch(loadingAction(isLoading));
-    }
-  }, [dispatch, loadingAction, isLoading]);
 
   useEffect(() => {
-    handleLoading();
-  }, [handleLoading]);
-
-  return loader;
+    // dispatch(isLoading(loading));
+  }, [loading, dispatch]);
 };
 
 export default useLoader;
