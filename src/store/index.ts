@@ -15,6 +15,7 @@ import profileSlice from "@/features/profileSlice";
 import loaderSlice from "@/features/loaderSlice";
 import { userApi } from "@/services/profileService";
 import { addEntryApi } from "@/services/entryService";
+import { loaderMiddleware } from "@/middleware/loaderMiddleware";
 
 const persistConfig = {
   key: "root",
@@ -36,7 +37,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(userApi.middleware, addEntryApi.middleware),
+    })
+      .concat(userApi.middleware, addEntryApi.middleware)
+      .concat(loaderMiddleware),
 });
 
 export const persistor = persistStore(store);
