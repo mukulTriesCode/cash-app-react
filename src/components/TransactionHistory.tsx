@@ -4,7 +4,7 @@ import type { Entry } from "@/features/cashCountSlice";
 import { FilterSVG } from "@/lib/Svgs";
 import { lazy } from "react";
 import { useGetEntriesQuery } from "@/services/entryService";
-import useLoader from "@/hooks/useLoader";
+// import useLoader from "@/hooks/useLoader";
 const TransactionVerticalSlider = lazy(
   () => import("./TransactionVerticalSlider")
 );
