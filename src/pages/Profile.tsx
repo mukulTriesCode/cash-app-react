@@ -1,13 +1,13 @@
-import useLoader from "@/hooks/useLoader";
+// import useLoader from "@/hooks/useLoader";
 import { useGetUserQuery } from "@/services/profileService";
 import React, { useEffect } from "react";
 
 const Profile: React.FC = () => {
   const { data, isLoading } = useGetUserQuery("");
   const user = data?.user;
-  useEffect(() => {
-    useLoader(isLoading);
-  }, [isLoading]);
+  // useEffect(() => {
+  //   useLoader(isLoading);
+  // }, [isLoading]);
   return (
     <div className="p-4">
       {isLoading ? (
