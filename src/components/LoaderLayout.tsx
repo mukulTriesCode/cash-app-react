@@ -7,20 +7,19 @@ import { routes } from "../routes";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import LoadingSpinner from "./LoadingSpinner";
+
 const LoaderLayout: React.FC = () => {
   const location = useLocation();
-  const isLoading = useSelector((state: RootState) => state.loader.loading);
   const isProtectedRoute = routes.find(
     (route) => route.path === location.pathname
   )?.protected;
-  console.log("isLoading", isLoading);
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+
+  const loading = useSelector((state: RootState) => state.loader.loading);
 
   return (
     <>
       {isProtectedRoute && <Sidebar />}
+
       <div
         className={
           isProtectedRoute
@@ -28,6 +27,7 @@ const LoaderLayout: React.FC = () => {
             : "relative grid grid-cols-5"
         }
       >
+        {/* Background Image */}
         <div className="absolute z-[-1] top-0 left-0 w-full min-h-screen h-full opacity-10">
           <img
             className="w-full h-full object-cover"
@@ -42,11 +42,15 @@ const LoaderLayout: React.FC = () => {
             height="1080"
           />
         </div>
+
+        {/* Navbar or Placeholder */}
         {isProtectedRoute ? (
           <Navbar />
         ) : (
           <div className="hidden sm:block col-span-3 bg-blue-600"></div>
         )}
+
+        {/* Page Content */}
         <div
           className={`${
             isProtectedRoute
@@ -62,6 +66,9 @@ const LoaderLayout: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* Global Loader Overlay */}
+        {loading && <LoadingSpinner />}
       </div>
     </>
   );
