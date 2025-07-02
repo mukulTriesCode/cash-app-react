@@ -7,10 +7,9 @@ import {
   BarElement,
   LineElement,
 } from "chart.js";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import { months } from "@/lib/utils";
 import { Entry } from "@/features/cashCountSlice";
+import { useGetEntriesQuery } from "@/services/entryService";
 
 // Register only the required components
 ChartJS.register(
