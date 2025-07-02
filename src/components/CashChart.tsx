@@ -59,7 +59,8 @@ const ChartWrapper = ({ type, data, options }: { type: "bar" | "line", data: any
 
 const CashChart: React.FC = () => {
   const [chartType, setChartType] = useState<"bar" | "line">("bar");
-  const entries = useSelector((state: RootState) => state?.root?.entries ?? []);
+  const { data } = useGetEntriesQuery("");
+  const entries = data?.data ?? [];
 
   const { labels, amounts } = useMemo(() => {
     const monthData = entries.reduce((acc: Record<string, number>, entry: Entry) => {
