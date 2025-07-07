@@ -48,6 +48,7 @@ export const months = [
   { label: "JUL", val: 'July' },
   { label: "AUG", val: 'August' },
   { label: "SEP", val: 'September' },
+
   { label: "OCT", val: 'October' },
   { label: "NOV", val: 'November' },
   { label: "DEC", val: 'December' },
@@ -56,7 +57,7 @@ export const months = [
 export const fetchData = async () => {
   try {
     const response = await axios.get(import.meta.env.VITE_API_URL || "");
-    console.log("data :>> ", response.data);
+    return response.data;
   } catch (error) {
     console.error("Error fetching data: ", error);
   }
