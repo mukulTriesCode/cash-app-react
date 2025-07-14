@@ -6,7 +6,7 @@ Todo
 -Search Entries, Categories
 -Search Page
 -Notifications (Low balance, Milestones)
--Profile
+-Profile - in progress✅
 -Login, logout, signup✅
 -Authentication✅
 -Add CRUD
