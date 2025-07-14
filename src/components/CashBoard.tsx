@@ -22,9 +22,9 @@ const CashBoard: React.FC = () => {
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     )[0]?.amount;
   };
-  const username = "";
+  const username = userData?.user?.username || "";
   const openingBalance = getOpeningBalance(entryData?.data || []);
-  const email = "";
+  const email = userData?.user?.email || "";
   const totalAmount = root?.totalAmount;
   const isMobile = useMobile(834);
 
