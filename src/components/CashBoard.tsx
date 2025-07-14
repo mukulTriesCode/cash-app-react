@@ -6,9 +6,18 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HeartSVG } from "@/lib/Svgs";
 import useMobile from "@/hooks/useMobile";
+import { Entry } from "@/features/cashCountSlice";
 
 const CashBoard: React.FC = () => {
   const root = useSelector((state: RootState) => state?.root);
+  const getOpeningBalance = (entries: Entry[]) => {
+    if (entries.length === 0) {
+      return null;
+    }
+    return [...entries].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )[0]?.amount;
+  };
   const username = "";
   const email = "";
   const totalAmount = root?.totalAmount;
