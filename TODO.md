@@ -10,7 +10,8 @@ Todo
 -Login, logout, signup✅
 -Authentication✅
 -Add CRUD
--Backend configuration (MongoDB & NodeJS) - in progress
+-Backend configuration (MongoDB & NodeJS) - in progress✅
+-Frontend configuration (ReactJS & TailwindCSS)✅
 -RTK Query - in progress
     -Handle Categories✅
     -Handle Transactions✅
