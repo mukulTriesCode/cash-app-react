@@ -1,4 +1,4 @@
-Todo
+Todo Tasks
 -Filter transaction list according to cash in and out✅
 -Configure the charts✅
 -Add category and category slug page (Default category and other category list)
