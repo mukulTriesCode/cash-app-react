@@ -21,9 +21,9 @@ const CashBoard: React.FC = () => {
     )[0]?.amount;
   };
   const username = "";
+  const openingBalance = getOpeningBalance(entryData?.data || []);
   const email = "";
   const totalAmount = root?.totalAmount;
-  const openingBalance = 0;
   const isMobile = useMobile(834);
 
   return (
