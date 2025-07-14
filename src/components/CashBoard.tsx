@@ -13,7 +13,6 @@ import { useGetUserQuery } from "@/services/profileService";
 const CashBoard: React.FC = () => {
   const { data: entryData } = useGetEntriesQuery("");
   const { data: userData } = useGetUserQuery("");
-  const root = useSelector((state: RootState) => state?.root);
   const getOpeningBalance = (entries: Entry[]) => {
     if (entries.length === 0) {
       return null;
