@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { HeartSVG } from "@/lib/Svgs";
 import useMobile from "@/hooks/useMobile";
 import { Entry } from "@/features/cashCountSlice";
+import { useGetEntriesQuery } from "@/services/entryService";
 
 const CashBoard: React.FC = () => {
+  const { data: entryData } = useGetEntriesQuery("");
   const root = useSelector((state: RootState) => state?.root);
   const getOpeningBalance = (entries: Entry[]) => {
     if (entries.length === 0) {
