@@ -12,11 +12,11 @@ Todo
 -Add CRUD
 -Backend configuration (MongoDB & NodeJS) - in progress
 -RTK Query - in progress
-    -Handle Categories
-    -Handle Transactions
-    -Handle Users
-    -Handle Auth
-    -Handle Profile
+    -Handle Categories✅
+    -Handle Transactions✅
+    -Handle Users✅
+    -Handle Auth✅
+    -Handle Profile✅
     -Handle Charts
 -Redux
     -Handle Notifications
