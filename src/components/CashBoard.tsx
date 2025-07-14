@@ -1,8 +1,6 @@
 import React from "react";
 import CashDash from "../assets/CashDash-min.webp";
 import Profile from "../assets/profile.webp";
-import { RootState } from "../store";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HeartSVG } from "@/lib/Svgs";
 import useMobile from "@/hooks/useMobile";
