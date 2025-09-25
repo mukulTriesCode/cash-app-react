@@ -9,7 +9,7 @@ Todo Tasks
 -Profile - in progress✅
 -Login, logout, signup✅
 -Authentication✅
--Add CRUD
+-Add CRUD✅
 -Backend configuration (MongoDB & NodeJS) - in progress✅
 -Frontend configuration (ReactJS & TailwindCSS)✅
 -RTK Query - in progress
